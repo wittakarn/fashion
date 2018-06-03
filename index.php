@@ -3,10 +3,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 require_once('config.php');
 require_once('connection.php');
-require_once(DOCUMENT_ROOT . '/class/Helper.php');
 $conn = DataBaseConnection::createConnect();
-$imageRoot = MAIN;
-$priceType = Helper::getDefaultValue($_GET['price_type'], "A");
 ?>
 
 <!DOCTYPE html>
@@ -22,9 +19,6 @@ $priceType = Helper::getDefaultValue($_GET['price_type'], "A");
     </head>
 
     <body>
-        <?php
-        include(DOCUMENT_ROOT . "/include/brand.php");
-        ?>
     </body>
     <link rel="stylesheet" href="<?php echo ROOT; ?>css/bootstrap.min.css"/>
     <script src="<?php echo ROOT; ?>js/jquery-3.3.1.min.js"></script>
