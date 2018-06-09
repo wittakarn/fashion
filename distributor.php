@@ -6,7 +6,7 @@ require_once('connection.php');
 require_once(DOCUMENT_ROOT . '/class/Helper.php');
 $conn = DataBaseConnection::createConnect();
 $imageRoot = MAIN;
-$priceType = Helper::getDefaultValue($_GET['price_type'], "A");
+$priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A");
 ?>
 
 <!DOCTYPE html>
@@ -19,15 +19,57 @@ $priceType = Helper::getDefaultValue($_GET['price_type'], "A");
         <meta name="description" content="">
         <meta name="author" content="">
         <title>ขายสินค้า</title>
+        <link rel="stylesheet" href="<?php echo ROOT; ?>/lib-css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="<?php echo ROOT; ?>/css/distributor.css"/>
+        <script src="<?php echo ROOT; ?>/lib-js/jquery-3.3.1.min.js"></script>
+        <script src="<?php echo ROOT; ?>/lib-js/bootstrap.min.js"></script>
+        <script src="<?php echo ROOT; ?>/lib-js/popper.min.js"></script>
+        <script src="<?php echo ROOT; ?>/lib-js/handlebars-v4.0.11.js"></script>
+        <script src="<?php echo ROOT; ?>/js/Ajax.js"></script>
+        <script src="<?php echo ROOT; ?>/js/distributor.js"></script>
     </head>
 
     <body>
         <?php
         include(DOCUMENT_ROOT . "/include/brand.php");
         ?>
+        <div class="container-fluid" id="productPlaceholder"/>
     </body>
-    <link rel="stylesheet" href="<?php echo ROOT; ?>css/bootstrap.min.css"/>
-    <script src="<?php echo ROOT; ?>js/jquery-3.3.1.min.js"></script>
-    <script src="<?php echo ROOT; ?>js/bootstrap.min.js"></script>
-    <script src="<?php echo ROOT; ?>js/popper.min.js"></script>
 </html>
+<script id="productTemplate" type="text/x-handlebars-template">
+    {{#each this.products}}
+    <ul class="product-row">
+        <li class="product__column product__column--main">
+            <a class="product__link" href="distributor.php?show=detail&product_id={{product_id}}&product_sub=1&cate3_id={{../cate3Id}}&cate3_name={{../productName}}">
+                <img class="product__link--image" src="<?php echo MAIN ?>pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^1_main.jpg"/>
+                <div class="product__link--code">{{product_code}}</div>
+            </a>
+        </li>
+        {{#each product_opts}}
+            <li class="product__column product__column--option">
+                <div class="product-container">
+                    <div class="product-opt--code">{{product_opt_code}}</div>
+                    <img src="<?php echo MAIN ?>pic/product/{{../../productName}}/{{../product_code}}/{{../product_name2}}^{{option_index}}_main.jpg"/>
+                    <ul>
+                        <li class="product-opt--dimension">
+                            {{product_opt_dimension}}
+                        </li>
+                        <li class="product-opt--costcn">
+                            {{product_opt_costcn}}
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+    {{/each}}
+</script>
+<script>
+var distributorOptions = {
+    product: {
+        url: "<?php echo ROOT ?>/ajax/search.product.php",
+        dataSize: 30,
+    }
+};
+init(distributorOptions);
+</script>

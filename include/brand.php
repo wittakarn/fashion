@@ -6,7 +6,7 @@ require_once('connection.php');
 require_once(DOCUMENT_ROOT . '/class/Category.php');
 require_once(DOCUMENT_ROOT . '/class/Helper.php');
 $imageRoot = MAIN;
-$priceType = Helper::getDefaultValue($_GET['price_type'], "A");
+$priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A");
 $category3s = Category::getCate3ByCate1Id($conn, 1);
 ?>
 
@@ -35,12 +35,14 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
         <?php
         foreach ($category3s as &$category3) {
             echo "<li class='nav-item brand__list'>"
-            . "<a class='nav-link brand__link' href='distributor.php?brand={$category3["cate3_name"]}&c1={$category3["cate3_id"]}&price_type={$priceType}'>"
+            . "<div cate3-id='{$category3["cate3_id"]}' cate3-name='{$category3["cate3_name"]}' class='nav-link brand__link'>"
             . "<img class='brand__link--image' src='{$imageRoot}pic/brand/{$category3["cate3_name"]}.jpg'>"
-            . "</a>"
+            . "</div>"
             . "</li>";
         }
         ?>
     </ul>
 </div>
-<link rel="stylesheet" href="<?php echo ROOT; ?>css/brand.css"/>
+<link rel="stylesheet" href="<?php echo ROOT; ?>/css/brand.css"/>
+<script src="<?php echo ROOT; ?>/lib-js/eventemitter.js"></script>
+<script src="<?php echo ROOT; ?>/js/brand.js"></script>

@@ -20,8 +20,8 @@ $conn = DataBaseConnection::createConnect();
 
     <body>
     </body>
-    <link rel="stylesheet" href="<?php echo ROOT; ?>css/bootstrap.min.css"/>
-    <script src="<?php echo ROOT; ?>js/jquery-3.3.1.min.js"></script>
-    <script src="<?php echo ROOT; ?>js/bootstrap.min.js"></script>
-    <script src="<?php echo ROOT; ?>js/popper.min.js"></script>
+    <link rel="stylesheet" href="<?php echo ROOT; ?>/css/bootstrap.min.css"/>
+    <script src="<?php echo ROOT; ?>/js/jquery-3.3.1.min.js"></script>
+    <script src="<?php echo ROOT; ?>/js/bootstrap.min.js"></script>
+    <script src="<?php echo ROOT; ?>/js/popper.min.js"></script>
 </html>
