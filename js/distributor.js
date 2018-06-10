@@ -36,9 +36,14 @@ function renderAllProduct(payload, products) {
 
         payload.pos = payload.pos + payload.size;
         $window.off("scroll");
-        $window.scroll(function () {
+        if ($(document).height() > $window.height()) {
+            $window.scroll(function () {
+                loadMoreData(payload);
+            });
+        } else {
+            // try to load more data when page did not have enough data to show browser scroll bar.
             loadMoreData(payload);
-        });
+        }
     }
 }
 
