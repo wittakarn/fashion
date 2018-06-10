@@ -12,17 +12,6 @@ a.nav-link.active {
     position: relative;
 }
 
-a.nav-link.active::after {
-    content: '';
-    position: absolute;
-    display: inline-block;
-    width: 90%;
-    height: 2px;
-    left: 5%;
-    bottom: 5px;
-    background-color: tomato;
-}
-
 .nav-link.brand__link:hover {
     background-color: #ccc;
     cursor: pointer;
@@ -42,4 +31,23 @@ a.nav-link.active::after {
     border: 1px solid;
     border-radius: 5px;
     box-shadow: 3px 3px #7cbbff;
+}
+
+@media (min-width: 992px){
+    a.nav-link.active::after {
+        content: '';
+        position: absolute;
+        display: inline-block;
+        width: 90%;
+        height: 2px;
+        left: 5%;
+        bottom: 5px;
+        background-color: tomato;
+    }
+    
+    .navbar-nav {
+        -ms-flex-direction: row;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }

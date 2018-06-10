@@ -8,7 +8,7 @@ function initBrandsEvent(){
 
 function emitClickEvent(){
     $this = $(this);
-    emitter.emit('brand_clicked', $this.attr('cate3-id'), $this.attr('cate3-name'));
+    emitter.emit('brand_clicked', $this.attr('cate3-id'), $this.attr('cate3-name'), 0);
 }
 
 initBrandsEvent();

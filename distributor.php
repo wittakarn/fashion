@@ -37,6 +37,7 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
     </body>
 </html>
 <script id="productTemplate" type="text/x-handlebars-template">
+    <div class="scroll-check-point"/>
     {{#each this.products}}
     <ul class="product-row">
         <li class="product__column product__column--main">
@@ -47,14 +48,14 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
         </li>
         {{#each product_opts}}
             <li class="product__column product__column--option">
-                <div class="product-container">
-                    <div class="product-opt--code">{{product_opt_code}}</div>
-                    <img src="<?php echo MAIN ?>pic/product/{{../../productName}}/{{../product_code}}/{{../product_name2}}^{{option_index}}_main.jpg"/>
+                <div class="product-opt__container">
+                    <div class="product-opt product-opt__code">{{product_opt_code}}</div>
+                    <img class="product-opt product-opt__image" src="<?php echo MAIN ?>pic/product/{{../../productName}}/{{../product_code}}/{{../product_name2}}^{{option_index}}_main.jpg"/>
                     <ul>
-                        <li class="product-opt--dimension">
+                        <li class="product-opt__detail product-opt__detail--dimension">
                             {{product_opt_dimension}}
                         </li>
-                        <li class="product-opt--costcn">
+                        <li class="product-opt__detail product-opt__detail--costcn">
                             {{product_opt_costcn}}
                         </li>
                     </ul>
