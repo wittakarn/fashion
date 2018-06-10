@@ -1,36 +1,56 @@
 var $window = $(window);
-var productPlaceholder;
-var productTemplate;
+var $productOptionPlaceholder;
+var $productPlaceholder;
+var $productOptionTemplate;
+var $productTemplate;
+var $scrollCheckPoing;
 var fetcher;
 
 function init(options) {
-    productPlaceholder = $('#productPlaceholder');
+    $productPlaceholder = $('#productPlaceholder');
+    $productOptionPlaceholder = $('#productOptionPlaceholder');
+    $scrollCheckPoing = $(".scroll-check-point");
     fetcher = new Fetcher(options.product);
+    productOptionTemplate = Handlebars.compile($('#productOptionTemplate').html());
     productTemplate = Handlebars.compile($('#productTemplate').html());
 }
 
-function renderAllProduct(cate3Id, cate3Name, lastPos, products) {
-    var response = {
-        cate3Id: cate3Id,
-        productName: cate3Name,
-        products: products,
+function renderAllProduct(payload, products) {
+    $scrollCheckPoing.addClass("invisible");
+    if (products && products.length > 0) {
+        var response = {
+            cate3Id: payload.cate3Id,
+            productName: payload.cate3Name,
+            products: products,
+        }
+        var hasOption = payload.cate3Opt === "y";
+        var template = hasOption ? productOptionTemplate : productTemplate;
+        var placeholder = hasOption ? $productOptionPlaceholder : $productPlaceholder;
+        if (payload.pos === 0) {
+            $productOptionPlaceholder.empty();
+            $productPlaceholder.empty();
+            placeholder.html(template(response));
+        } else {
+            placeholder.append(template(response));
+        }
+
+        payload.pos = payload.pos + payload.size;
+        $window.off("scroll");
+        $window.scroll(function () {
+            loadMoreData(payload);
+        });
     }
-    productPlaceholder.append(productTemplate(response));
-    $window.scroll(function () {
-        loadMoreData(cate3Id, cate3Name, lastPos);
-    });
 }
 
-function loadMoreData(cate3Id, cate3Name, lastPos) {
-
-    var $scrollCheckPoint = $(".scroll-check-point").last();
-    var topOfElement = $scrollCheckPoint.offset().top;
-    var bottomOfElement = topOfElement + $scrollCheckPoint.outerHeight();
+function loadMoreData(payload) {
+    var topOfElement = $scrollCheckPoing.offset().top;
+    var bottomOfElement = topOfElement + $scrollCheckPoing.outerHeight();
     var bottomOfScreen = $window.scrollTop() + window.innerHeight;
     var topOfScreen = $window.scrollTop();
 
     if ((bottomOfScreen > topOfElement) && (topOfScreen < bottomOfElement)) {
-        fetcher.fetchProduct(cate3Id, cate3Name, lastPos);
+        $scrollCheckPoing.removeClass("invisible");
+        fetcher.fetchProduct(payload);
         $window.off("scroll");
     }
 }
@@ -40,17 +60,12 @@ var Fetcher = function (options) {
     emitter.on('brand_clicked', this.fetchProduct.bind(this));
 };
 
-Fetcher.prototype.fetchProduct = function (cate3Id, cate3Name, pos) {
-    var payLoad = {
-        cate3_id: cate3Id,
-        pos: pos,
-        size: 30
-    };
+Fetcher.prototype.fetchProduct = function (payload) {
     var ajaxParam = {
         url: this.product.url,
-        data: payLoad,
+        data: payload,
         success: function (data, textStatus, xhr) {
-            renderAllProduct(cate3Id, cate3Name, payLoad.pos + payLoad.size, data);
+            renderAllProduct(payload, data);
         }
     };
     var ajax = new Ajax(ajaxParam);

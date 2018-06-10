@@ -6,6 +6,9 @@ class Helper {
         return $value != '' ? $value : $default;
     }
 
+    public static function getImageUrlByProductId($productId){
+        
+    }
 }
 
 ?>

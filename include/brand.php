@@ -38,24 +38,17 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
             </ul>
         </div>
     </nav>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarBrand" aria-controls="navbarBrand" aria-expanded="false" aria-label="Menu navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarBrand">
-            <ul class="navbar-nav brand__container">
-                <?php
-                foreach ($category3s as &$category3) {
-                    echo "<li class='nav-item brand__list'>"
-                    . "<div cate3-id='{$category3["cate3_id"]}' cate3-name='{$category3["cate3_name"]}' class='nav-link brand__link'>"
-                    . "<img class='brand__link--image' src='{$imageRoot}pic/brand/{$category3["cate3_name"]}.jpg'>"
-                    . "</div>"
-                    . "</li>";
-                }
-                ?>
-            </ul>
-        </div>
-    </nav>
+    <ul class="nav brand__container">
+        <?php
+        foreach ($category3s as &$category3) {
+            echo "<li class='nav-item brand__list'>"
+            . "<div cate3-id='{$category3["cate3_id"]}' cate3-name='{$category3["cate3_name"]}' cate3-opt='{$category3["cate3_product_opt"]}' class='nav-link brand__link'>"
+            . "<img class='brand__link--image' src='{$imageRoot}pic/brand/{$category3["cate3_name"]}.jpg'>"
+            . "</div>"
+            . "</li>";
+        }
+        ?>
+    </ul>
 </div>
 <link rel="stylesheet" href="<?php echo ROOT; ?>/css/brand.css"/>
 <script src="<?php echo ROOT; ?>/lib-js/eventemitter.js"></script>

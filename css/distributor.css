@@ -9,14 +9,15 @@ and open the template in the editor.
 */
 .product-row {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: .5rem 1rem;
     padding: 0;
     list-style-type: none;
 }
 
 .product__column {
-    flex-direction: row;
-    flex-wrap: wrap;
+    width: 12.5%;
 }
 
 .product__column--main {
@@ -25,7 +26,6 @@ and open the template in the editor.
 
 .product__link {
     display: inline-block;
-    width: 200px;
     height: 100%;
 }
 
@@ -38,11 +38,16 @@ and open the template in the editor.
 }
 
 .product-opt__container {
-    width: 200px;
     height: 100%;
     border: 1px solid black;
 }
 
 .product-opt.product-opt__image {
     width: 100%;
+}
+
+.scroll-check-point {
+    display: block;
+    margin: 0 auto;
+    width: 8%;
 }
