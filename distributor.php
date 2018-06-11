@@ -61,6 +61,9 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
                     <li class="product-opt__detail product-opt__detail--costcn">
                         {{product_opt_costcn}}
                     </li>
+                    <li class="product-opt__detail product-opt__detail--price">
+                        {{price}}
+                    </li>
                 </ul>
             </div>
         </li>

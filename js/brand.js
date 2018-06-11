@@ -9,6 +9,7 @@ function initBrandsEvent(){
 function emitClickEvent(){
     $this = $(this);
     var params = {
+        priceType: priceType,
         cate3Id: $this.attr('cate3-id'),
         cate3Name: $this.attr('cate3-name'),
         cate3Opt: $this.attr('cate3-opt'),

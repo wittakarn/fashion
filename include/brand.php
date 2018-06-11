@@ -51,5 +51,8 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
     </ul>
 </div>
 <link rel="stylesheet" href="<?php echo ROOT; ?>/css/brand.css"/>
+<script>
+    var priceType = "<?php echo $priceType ?>";
+</script>
 <script src="<?php echo ROOT; ?>/lib-js/eventemitter.js"></script>
 <script src="<?php echo ROOT; ?>/js/brand.js"></script>
