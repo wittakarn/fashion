@@ -56,6 +56,8 @@ try {
                     $productResult['cate3_name'] = Category::getCate3ByCate3Id($conn, $productId);
                     $productResult['option_index'] = $index;
                     $productResult['product_opts'] = null;
+                    $productResult['amount'] = $productDetail[$productDetailXStock];
+                    $productResult["price"] = get_price_product_cal($productResult["product_cost_cn"], $productResult["cate2_id"], $cate3Name, $priceType);
                     array_push($result, $productResult);
                 }
             }

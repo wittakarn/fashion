@@ -76,7 +76,17 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
     <li class="product__column product__column--main">
         <a class="product__link" href="distributor.php?show=detail&product_id={{product_id}}&product_sub={{option_index}}&cate3_id={{../cate3Id}}&cate3_name={{../productName}}">
             <img class="product__link--image" src="<?php echo MAIN ?>pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^{{option_index}}_main.jpg"/>
-            <div class="product__link--code">{{product_code}}</div>
+            <ul>
+                <li class="product-opt__detail product-opt__detail--code">
+                    {{product_code}}
+                </li>
+                <li class="product-opt__detail product-opt__detail--amount">
+                    {{amount}}
+                </li>
+                <li class="product-opt__detail product-opt__detail--price">
+                    {{price}}
+                </li>
+            </ul>
         </a>
     </li>
     {{/each}}
