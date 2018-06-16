@@ -10,8 +10,8 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
 $category3s = Category::getCate3ByCate1Id($conn, 1);
 ?>
 
-<div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container-fluid without-padding">
+    <nav class="navbar navbar-expand-lg navbar-light bg-lightgray">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Menu navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -50,6 +50,7 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
         ?>
     </ul>
 </div>
+<link rel="stylesheet" href="<?php echo ROOT; ?>/css/main.css"/>
 <link rel="stylesheet" href="<?php echo ROOT; ?>/css/brand.css"/>
 <script>
     var priceType = "<?php echo $priceType ?>";

@@ -18,8 +18,8 @@ a.nav-link.active {
 }
 
 .brand__list {
-    width: 10%;
-    min-width: 100px;
+    width: 7.14%;
+    min-width: 120px
 }
 
 .brand__link--image {
@@ -28,10 +28,10 @@ a.nav-link.active {
 
 .brand__link {
     padding: 0;
-    margin: .5rem 1rem;
-    border: 1px solid;
-    border-radius: 5px;
-    box-shadow: 3px 3px #7cbbff;
+    margin: 5px;
+    border: 2px solid lightgrey;
+    border-radius: 3px;
+    box-shadow: 3px 3px lightgrey;
 }
 
 @media (min-width: 992px){

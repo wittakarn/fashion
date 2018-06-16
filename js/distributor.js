@@ -1,4 +1,5 @@
 var $window = $(window);
+var paddingVerticalClassName = 'padding-vertical';
 var $productOptionPlaceholder;
 var $productPlaceholder;
 var $productOptionTemplate;
@@ -26,10 +27,13 @@ function renderAllProduct(payload, products) {
         var hasOption = payload.cate3Opt === "y";
         var template = hasOption ? productOptionTemplate : productTemplate;
         var placeholder = hasOption ? $productOptionPlaceholder : $productPlaceholder;
+        $productOptionPlaceholder.removeClass(paddingVerticalClassName);
+        $productPlaceholder.removeClass(paddingVerticalClassName)
         if (payload.pos === 0) {
             $productOptionPlaceholder.empty();
             $productPlaceholder.empty();
             placeholder.html(template(response));
+            placeholder.addClass(paddingVerticalClassName);
         } else {
             placeholder.append(template(response));
         }
