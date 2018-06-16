@@ -89,6 +89,10 @@ body {
     list-style-type: none;
 }
 
+a.product__link{
+    text-decoration: none;
+}
+
 .scroll-check-point {
     display: block;
     margin: 0 auto;

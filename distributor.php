@@ -44,7 +44,7 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
     {{#each this.products}}
     <ul class="product-row">
         <li class="product__column product__column--main">
-            <a class="product__link" href="distributor.php?show=detail&product_id={{product_id}}&product_sub=1&cate3_id={{../cate3Id}}&cate3_name={{../productName}}">
+            <a class="product__link" target="_blank" href="<?php echo MAIN ?>distributor.php?show=detail&product_id={{product_id}}&product_sub=1&cate3_id={{../cate3Id}}&cate3_name={{../productName}}">
                 <img class="product__link--image absolute-center" src="<?php echo MAIN ?>pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^1_main.jpg"/>
                 <div class="product__link--code">{{product_code}}</div>
             </a>
@@ -76,7 +76,7 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
 <script id="productTemplate" type="text/x-handlebars-template">
     {{#each this.products}}
     <li class="product__column product__column--main">
-        <a class="product__link" href="distributor.php?show=detail&product_id={{product_id}}&product_sub={{option_index}}&cate3_id={{../cate3Id}}&cate3_name={{../productName}}">
+        <a class="product__link" target="_blank" href="<?php echo MAIN ?>distributor.php?show=detail&product_id={{product_id}}&product_sub={{option_index}}&cate3_id={{../cate3Id}}&cate3_name={{../productName}}">
             <img class="product__link--image" src="<?php echo MAIN ?>pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^{{option_index}}_main.jpg"/>
             <ul class="bgg-lightgray">
                 <li class="product-opt__detail product-opt__detail--code">
