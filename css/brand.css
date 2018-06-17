@@ -26,8 +26,7 @@ a.nav-link.active {
 }
 
 .brand__list {
-    width: 7.14%;
-    min-width: 120px
+    width: 10%;
 }
 
 .brand__link--image {
@@ -57,4 +56,10 @@ a.nav-link.active::after {
     -ms-flex-direction: row;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+@media (max-width: 1000px){
+    .brand__list {
+        width: 14%;
+    }
 }

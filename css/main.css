@@ -37,3 +37,9 @@ and open the template in the editor.
         width: 1400px;
     }
 }
+
+@media (max-width: 1000px){
+    body {
+        width: 1000px;
+    }
+}
