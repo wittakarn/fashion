@@ -11,7 +11,7 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
 ?>
 
 <div class="container-fluid without-padding">
-    <nav class="navbar navbar-expand-lg navbar-light bg-lightgray">
+    <nav class="navbar navbar-expand bg-brown">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Menu navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -38,7 +38,7 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
             </ul>
         </div>
     </nav>
-    <ul class="nav brand__container">
+    <ul class="nav brand__container bgg-darkgreen">
         <?php
         foreach ($category3s as &$category3) {
             echo "<li class='nav-item brand__list'>"

@@ -33,8 +33,8 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
         <?php
         include(DOCUMENT_ROOT . "/include/brand.php");
         ?>
-        <div class="container-fluid bg-lightgray" id="productOptionPlaceholder"></div>
-        <div class="container-fluid bg-lightgray">
+        <div class="container-fluid bg-brown" id="productOptionPlaceholder"></div>
+        <div class="container-fluid bg-brown">
             <ul class="product-row" id="productPlaceholder"></ul>
         </div>
         <img src="<?php echo WEB_ROOT ?>/image/loading.gif" class="scroll-check-point invisible"/>
@@ -44,15 +44,15 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
     {{#each this.products}}
     <ul class="product-row">
         <li class="product__column product__column--main">
-            <a class="product__link" target="_blank" href="<?php echo MAIN ?>distributor.php?show=detail&product_id={{product_id}}&product_sub=1&cate3_id={{../cate3Id}}&cate3_name={{../productName}}">
-                <img class="product__link--image absolute-center" src="<?php echo MAIN ?>pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^1_main.jpg"/>
+            <a class="product__link bgg-brown" target="_blank" href="<?php echo MAIN ?>distributor.php?show=detail&product_id={{product_id}}&product_sub=1&cate3_id={{../cate3Id}}&cate3_name={{../productName}}">
+                <img class="product__link--image" src="<?php echo MAIN ?>pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^1_main.jpg"/>
                 <div class="product__link--code">{{product_code}}</div>
             </a>
         </li>
         {{#each product_opts}}
         <li class="product__column product__column--option">
-            <div class="bgg-lightgray">
-                <div class="product-opt__container">
+            <div class="product-opt__container bgg-brown">
+                <div class="product-opt__container--image">
                     <img class="product-opt product-opt__image" src="<?php echo MAIN ?>pic/product/{{../../productName}}/{{../product_code}}/{{../product_name2}}^{{option_index}}_main.jpg"/>
                     <div class="product-opt product-opt__code">{{product_opt_code}}</div>
                 </div>
@@ -78,7 +78,7 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
     <li class="product__column product__column--main">
         <a class="product__link" target="_blank" href="<?php echo MAIN ?>distributor.php?show=detail&product_id={{product_id}}&product_sub={{option_index}}&cate3_id={{../cate3Id}}&cate3_name={{../productName}}">
             <img class="product__link--image" src="<?php echo MAIN ?>pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^{{option_index}}_main.jpg"/>
-            <ul class="bgg-lightgray">
+            <ul class="product-opt__container product-opt__container bgg-brown">
                 <li class="product-opt__detail product-opt__detail--code">
                     {{product_code}}
                 </li>

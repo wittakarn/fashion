@@ -12,8 +12,16 @@ a.nav-link.active {
     position: relative;
 }
 
+.nav-link {
+    color: #80ADD7;
+}
+
+.nav-link:hover {
+    color: #0ABDA0;
+}
+
 .nav-link.brand__link:hover {
-    background-color: #ccc;
+    background-color: #80ADD7;
     cursor: pointer;
 }
 
@@ -34,21 +42,19 @@ a.nav-link.active {
     box-shadow: 3px 3px lightgrey;
 }
 
-@media (min-width: 992px){
-    a.nav-link.active::after {
-        content: '';
-        position: absolute;
-        display: inline-block;
-        width: 90%;
-        height: 2px;
-        left: 5%;
-        bottom: 5px;
-        background-color: tomato;
-    }
+a.nav-link.active::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 90%;
+    height: 2px;
+    left: 5%;
+    bottom: 5px;
+    background-color: #BF9D7A;
+}
 
-    .navbar-nav {
-        -ms-flex-direction: row;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
+.navbar-nav {
+    -ms-flex-direction: row;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
