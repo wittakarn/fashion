@@ -36,10 +36,13 @@ body {
     width: 15%;
 }
 
+.product__column--option {
+    height: 100%;
+}
+
 .product__link {
     position: relative;
     display: inline-block;
-    height: 100%;
     width: 100%;
     color: #80ADD7;
 }
@@ -48,14 +51,13 @@ body {
     width: 100%;
 }
 
-.product__link--code {
-    bottom: 0;
-    width: 100%;
+.product__detail {
     text-align: center;
+    color: #80ADD7;
 }
 
-.product-opt__container {
-    padding: 0 15%;
+ul.product-opt__container {
+    padding-left: 0;
 }
 
 .product-opt__container--image {
@@ -83,6 +85,16 @@ body {
 .product-opt__detail {
     color: #80ADD7;
     list-style-type: none;
+    padding-left: 15%;
+}
+
+.product-opt__detail--reserve {
+    padding-left: 0;
+    text-align: center;
+}
+
+.reserve-button {
+    margin: 5%;
 }
 
 a.product__link{

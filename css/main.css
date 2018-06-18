@@ -21,15 +21,20 @@ and open the template in the editor.
 }
 
 .bg-brown {
-    background-color: #EBF2EA;
+    background-color: #ebf2ea;
 }
 
 .bgg-brown {
-    background: linear-gradient(135deg, #D4DCA9, #EBF2EA 60%, #D4DCA9);
+    background: linear-gradient(135deg, #d4dca9, #ebf2ea 60%, #d4dca9);
+}
+
+.btn-green {
+    background-color: #0abda0;
+    color: #ebf2ea;
 }
 
 .bgg-darkgreen {
-    background: linear-gradient(0deg, #EBF2EA, #D4DCA9 70%, #EBF2EA);
+    background: linear-gradient(0deg, #ebf2ea, #d4dca9 70%, #ebf2ea);
 }
 
 @media (max-width: 1400px){

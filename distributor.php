@@ -46,8 +46,10 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
         <li class="product__column product__column--main">
             <a class="product__link bgg-brown" target="_blank" href="<?php echo MAIN ?>distributor.php?show=detail&product_id={{product_id}}&product_sub=1&cate3_id={{../cate3Id}}&cate3_name={{../productName}}">
                 <img class="product__link--image" src="<?php echo MAIN ?>pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^1_main.jpg"/>
-                <div class="product__link--code">{{product_code}}</div>
             </a>
+            <div class="product__detail">
+                <p class="product__detail product__detail--code">{{product_code}}</p>
+            </div>
         </li>
         {{#each product_opts}}
         <li class="product__column product__column--option">
@@ -66,6 +68,9 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
                     <li class="product-opt__detail product-opt__detail--price">
                         {{price}}
                     </li>
+                    <li class="product-opt__detail product-opt__detail--reserve">
+                        <button type="button" class="btn btn-green reserve-button">จองสินค้า</button>
+                    </li>
                 </ul>
             </div>
         </li>
@@ -78,18 +83,21 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
     <li class="product__column product__column--main">
         <a class="product__link" target="_blank" href="<?php echo MAIN ?>distributor.php?show=detail&product_id={{product_id}}&product_sub={{option_index}}&cate3_id={{../cate3Id}}&cate3_name={{../productName}}">
             <img class="product__link--image" src="<?php echo MAIN ?>pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^{{option_index}}_main.jpg"/>
-            <ul class="product-opt__container product-opt__container bgg-brown">
-                <li class="product-opt__detail product-opt__detail--code">
-                    {{product_code}}
-                </li>
-                <li class="product-opt__detail product-opt__detail--amount">
-                    {{amount}}
-                </li>
-                <li class="product-opt__detail product-opt__detail--price">
-                    {{price}}
-                </li>
-            </ul>
         </a>
+        <ul class="product-opt__container product-opt__container bgg-brown">
+            <li class="product-opt__detail product-opt__detail--code">
+                {{product_code}}
+            </li>
+            <li class="product-opt__detail product-opt__detail--amount">
+                {{amount}}
+            </li>
+            <li class="product-opt__detail product-opt__detail--price">
+                {{price}}
+            </li>
+            <li class="product-opt__detail product-opt__detail--reserve">
+                <button type="button" class="btn btn-green reserve-button">จองสินค้า</button>
+            </li>
+        </ul>
     </li>
     {{/each}}
 </script>
