@@ -39,6 +39,7 @@ try {
                     $productOptCostcn = "product_opt_{$index}_costcn";
                     if (ProductDetail::getProductAmount($productDetail, $index) != 0 && ($productOpt[$productOptCode] != NULL && $productOpt[$productOptCostcn] != NULL)) {
                         $option["option_index"] = $index;
+                        $option["product_uid"] = "{$productDetail['product_detail_id']}#{$index}";
                         $option["product_opt_dimension"] = $productOpt[$productOptDimension];
                         $option["product_opt_code"] = $productOpt[$productOptCode];
                         $option["product_opt_costcn"] = $productOpt[$productOptCostcn];
@@ -53,6 +54,7 @@ try {
             for ($index = 1; $index < 9; $index++) {
                 $productDetailXStock = "product_detail_{$index}_stock";
                 if ($productDetail[$productDetailXStock] != NULL && $productDetail[$productDetailXStock] > 0) {
+                    $productResult["product_uid"] = "{$productDetail['product_detail_id']}#{$index}";
                     $productResult['cate3_name'] = Category::getCate3ByCate3Id($conn, $productId);
                     $productResult['option_index'] = $index;
                     $productResult['product_opts'] = null;

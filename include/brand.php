@@ -36,6 +36,9 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
                     <a class="nav-link"a href="quotation_new.php"><h5>ทำใบเสนอใหม่</h5></a>
                 </li>
             </ul>
+            <a class="fas fa-shopping-basket fa-2x shopping-icon" href="#">
+                <div id="productReservedCount" class="product-count">0</div>
+            </a>
         </div>
     </nav>
     <ul class="nav brand__container bgg-darkgreen">

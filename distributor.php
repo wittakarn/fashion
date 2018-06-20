@@ -20,6 +20,7 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
         <meta name="author" content="">
         <title>ขายสินค้า</title>
         <link rel="stylesheet" href="<?php echo ROOT; ?>/lib-css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="<?php echo ROOT; ?>/lib-css/fontawesome-all.min.css"/>
         <link rel="stylesheet" href="<?php echo ROOT; ?>/css/distributor.css"/>
         <script src="<?php echo ROOT; ?>/lib-js/jquery-3.3.1.min.js"></script>
         <script src="<?php echo ROOT; ?>/lib-js/bootstrap.min.js"></script>
@@ -69,7 +70,7 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
                         {{price}}
                     </li>
                     <li class="product-opt__detail product-opt__detail--reserve">
-                        <button type="button" class="btn btn-green reserve-button">จองสินค้า</button>
+                        <button type="button" class="btn btn-green reserve-button" product-uid="{{product_uid}}">จองสินค้า</button>
                     </li>
                 </ul>
             </div>
@@ -95,7 +96,7 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
                 {{price}}
             </li>
             <li class="product-opt__detail product-opt__detail--reserve">
-                <button type="button" class="btn btn-green reserve-button">จองสินค้า</button>
+                <button type="button" class="btn btn-green reserve-button" product-uid="{{product_uid}}">จองสินค้า</button>
             </li>
         </ul>
     </li>

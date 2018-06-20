@@ -1,9 +1,11 @@
 var $brands = $('.brand__link');
+var $productReservedCount = $('#productReservedCount');
 
 var emitter = new EventEmitter();
 
 function initBrandsEvent(){
     $brands.click(emitClickEvent);
+    emitter.on('reserve_clicked', updateReserveCount);
 }
 
 function emitClickEvent(){
@@ -17,6 +19,10 @@ function emitClickEvent(){
         size: 30
     }
     emitter.emit('brand_clicked', params);
+}
+
+function updateReserveCount(productCount){
+    $productReservedCount.html(productCount);
 }
 
 initBrandsEvent();
