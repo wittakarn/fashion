@@ -7,10 +7,6 @@ and open the template in the editor.
     Created on : Jun 9, 2018, 4:58:07 PM
     Author     : wittakarn
 */
-body {
-    overflow-y: scroll;
-}
-
 .product-row {
     display: flex;
     flex-direction: row;

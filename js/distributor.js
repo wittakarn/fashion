@@ -93,7 +93,9 @@ function putReserveProductToLocalStorage(productUid, imageSrc, productDetail, pr
                 productUid: productUid,
                 imageSrc: imageSrc,
                 productDetail: productDetail,
-                productPrice: productPrice
+                quantity: 1,
+                productPrice: productPrice,
+                productTotalPrice: productPrice
             });
         }
         localStorage.products = JSON.stringify(products);

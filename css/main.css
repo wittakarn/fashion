@@ -7,6 +7,10 @@ and open the template in the editor.
     Created on : Jun 16, 2018, 12:22:00 PM
     Author     : wittakarn
 */
+body {
+    overflow-y: scroll;
+    min-width: 1000px;
+}
 
 .without-padding {
     padding: 0;
@@ -42,16 +46,4 @@ and open the template in the editor.
     width: 100%;
     top: 50%;
     transform: translateY(-50%);
-}
-
-@media (max-width: 1400px){
-    body {
-        width: 1400px;
-    }
-}
-
-@media (max-width: 1000px){
-    body {
-        width: 1000px;
-    }
 }

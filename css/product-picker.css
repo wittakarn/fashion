@@ -7,10 +7,6 @@ and open the template in the editor.
     Created on : Jun 9, 2018, 4:58:07 PM
     Author     : wittakarn
 */
-body {
-    overflow-y: scroll;
-}
-
 .summary-data {
     font-size: 1.5em;
     margin-right: 5px;
@@ -40,10 +36,6 @@ body {
     text-align: left;
 }
 
-.researve-product__detail--total-price {
-
-}
-
 .researve-product__link--image {
     width: 100%;
 }
@@ -55,6 +47,12 @@ body {
 
 .researve-product__detail--quantity {
     width: 20%;
+}
+
+.researve-product__detail--price {
+    display: inline-block;
+    width: 48%;
+    text-align: right;
 }
 
 .researve-product__detail--button {
@@ -77,4 +75,8 @@ body {
 .quotation-button {
     display: block;
     margin: auto;
+}
+
+.quantity__icon {
+    cursor: pointer;
 }

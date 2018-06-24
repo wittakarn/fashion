@@ -43,11 +43,12 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
         <li class="researve-product__detail researve__detail--price-label">
             <span class="summary-data">ราคารวม</span>
         </li>
-        <li class="researve-product__detail researve-product__detail--total-price">
-            <span class="summary-data" id="summaryPriceDisplay">{{summary}}</span><span class="summary-data">บาท</span>
+        <li class="researve-product__detail researve-product__detail--summary-price">
+            <span class="summary-data" id="summaryPriceDisplay">{{summary}}</span>
+            <span class="summary-data">บาท</span>
             <button type="button" 
                 class="btn btn-green quotation-button">
-            ใบเสนอราคา
+            ออกใบเสนอราคา
             </button>
             <input type="hidden" id="summaryPriceInputHidden" name="summaryPrice[]" value={{productUid}}/>
         </li>
@@ -56,7 +57,9 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
     <ul class="researve-product researve-product__container bgg-brown">
         <li class="researve-product__detail researve__detail--image">
             <img class="researve-product__link--image" src="{{imageSrc}}"/>
-            <input type="hidden" name="productUid[]" value={{productUid}}/>
+            <input type="hidden" name="productUid[]" value="{{productUid}}"/>
+            <input type="hidden" name="productPrice[]" value="{{productPrice}}"/>
+            <input type="hidden" name="productTotalPrice[]" value="{{productTotalPrice}}"/>
         </li>
         <li class="researve-product__detail researve-product__detail--description">
             <p>รายละเอียด</p>
@@ -64,10 +67,19 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
         </li>
         <li class="researve-product__detail researve-product__detail--quantity">
             <p>จำนวน</p>
-            <input type="text" name="quantity[]" class="form-control quantity" value="1"/>
+            <i class="fas fa-lg fa-border fa-minus-circle quantity__icon quantity__icon--minus"></i>
+            <input type="text" name="quantity[]" class="form-control quantity" value="{{quantity}}"/>
+            <i class="fas fa-lg fa-border fa-plus-circle quantity__icon quantity__icon--plus"></i>
         </li>
         <li class="researve-product__detail researve-product__detail--button">
-            <p class="researve-product__detail--price">ราคา {{productPrice}}</p>
+            <div>
+                <span class="researve-product__detail--price">ราคา</span>
+                <span class="researve-product__detail--price">{{productPrice}}</span>
+            </div>
+            <div>
+                <span class="researve-product__detail--price">รวม</span>
+                <span class="researve-product__detail--price researve-product__detail--total-price">{{productTotalPrice}}</span>
+            </div>
             <button type="button" 
                 class="btn btn-default remove-button">
             ลบ
