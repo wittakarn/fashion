@@ -9,14 +9,13 @@ var $scrollCheckPoing;
 var fetcher;
 
 function init(options) {
-    if (!localStorage.products) {
-        localStorage.products = "[]";
-    }
-
     $productPlaceholder = $('#productPlaceholder');
     $productOptionPlaceholder = $('#productOptionPlaceholder');
     $scrollCheckPoing = $(".scroll-check-point");
     fetcher = new Fetcher(options.product);
+    if(options.extraParam) {
+        fetcher.fetchProduct(options.extraParam);
+    }
     productOptionTemplate = Handlebars.compile($('#productOptionTemplate').html());
     productTemplate = Handlebars.compile($('#productTemplate').html());
 }
@@ -47,7 +46,10 @@ function renderAllProduct(payload, products) {
         $(reserveProductButtonSelector).click(function () {
             var $this = $(this);
             var productUid = $this.attr('product-uid');
-            putReserveProductToLocalStorage(productUid);
+            var imageSrc = $this.attr('image-src');
+            var productDetail = $this.attr('product-detail');
+            var productPrice = $this.attr('product-price');
+            putReserveProductToLocalStorage(productUid, imageSrc, productDetail, productPrice);
         });
 
         payload.pos = payload.pos + payload.size;
@@ -76,7 +78,7 @@ function loadMoreData(payload) {
     }
 }
 
-function putReserveProductToLocalStorage(productUid) {
+function putReserveProductToLocalStorage(productUid, imageSrc, productDetail, productPrice) {
     var isDuplicateProductUid = false;
     if (localStorage.products) {
         var products = JSON.parse(localStorage.products);
@@ -88,7 +90,10 @@ function putReserveProductToLocalStorage(productUid) {
         });
         if (!isDuplicateProductUid) {
             products.push({
-                productUid: productUid
+                productUid: productUid,
+                imageSrc: imageSrc,
+                productDetail: productDetail,
+                productPrice: productPrice
             });
         }
         localStorage.products = JSON.stringify(products);

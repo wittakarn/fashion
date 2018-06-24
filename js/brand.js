@@ -3,12 +3,16 @@ var $productReservedCount = $('#productReservedCount');
 
 var emitter = new EventEmitter();
 
-function initBrandsEvent(){
+function initBrandsEvent() {
+    if (!localStorage.products) {
+        localStorage.products = "[]";
+    }
     $brands.click(emitClickEvent);
     emitter.on('reserve_clicked', updateReserveCount);
+    updateReserveCount(JSON.parse(localStorage.products).length);
 }
 
-function emitClickEvent(){
+function emitClickEvent() {
     $this = $(this);
     var params = {
         priceType: priceType,
@@ -17,11 +21,11 @@ function emitClickEvent(){
         cate3Opt: $this.attr('cate3-opt'),
         pos: 0,
         size: 30
-    }
+    };
     emitter.emit('brand_clicked', params);
 }
 
-function updateReserveCount(productCount){
+function updateReserveCount(productCount) {
     $productReservedCount.html(productCount);
 }
 

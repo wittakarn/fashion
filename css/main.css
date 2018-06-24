@@ -37,6 +37,13 @@ and open the template in the editor.
     background: linear-gradient(0deg, #ebf2ea, #d4dca9 70%, #ebf2ea);
 }
 
+.absolute-center {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 @media (max-width: 1400px){
     body {
         width: 1400px;

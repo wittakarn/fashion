@@ -14,7 +14,6 @@ if (typeof Array.prototype.indexOf === 'function') {
                 idx = i;
                 found = true;
             }
-
             i++;
         }
 

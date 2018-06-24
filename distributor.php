@@ -6,7 +6,8 @@ require_once('connection.php');
 require_once(DOCUMENT_ROOT . '/class/Helper.php');
 $conn = DataBaseConnection::createConnect();
 $imageRoot = MAIN;
-$priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A");
+$priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'priceType'), "A");
+$extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), null);
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +71,14 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
                         {{price}}
                     </li>
                     <li class="product-opt__detail product-opt__detail--reserve">
-                        <button type="button" class="btn btn-green reserve-button" product-uid="{{product_uid}}">จองสินค้า</button>
+                        <button type="button" 
+                            class="btn btn-green reserve-button" 
+                            product-uid="{{product_uid}}"
+                            product-detail="{{product_opt_dimension}}"
+                            product-price="{{price}}"
+                            image-src="<?php echo MAIN ?>pic/product/{{../../productName}}/{{../product_code}}/{{../product_name2}}^{{option_index}}_main.jpg">
+                        จองสินค้า
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -96,7 +104,14 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
                 {{price}}
             </li>
             <li class="product-opt__detail product-opt__detail--reserve">
-                <button type="button" class="btn btn-green reserve-button" product-uid="{{product_uid}}">จองสินค้า</button>
+                <button type="button" 
+                    class="btn btn-green reserve-button" 
+                    product-uid="{{product_uid}}" 
+                    product-detail="{{product_code}}"
+                    product-price="{{price}}"
+                    image-src="<?php echo MAIN ?>pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^{{option_index}}_main.jpg">
+                จองสินค้า
+                </button>
             </li>
         </ul>
     </li>
@@ -106,8 +121,9 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
 var distributorOptions = {
     product: {
         url: "<?php echo ROOT ?>/ajax/search.product.php",
-        dataSize: 30,
-    }
+        dataSize: 30
+    },
+    extraParam: <?php echo $extraParam != null ? $extraParam : 'null'; ?>
 };
 init(distributorOptions);
 </script>

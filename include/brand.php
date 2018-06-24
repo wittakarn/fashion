@@ -6,7 +6,7 @@ require_once('connection.php');
 require_once(DOCUMENT_ROOT . '/class/Category.php');
 require_once(DOCUMENT_ROOT . '/class/Helper.php');
 $imageRoot = MAIN;
-$priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A");
+$priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'priceType'), "A");
 $category3s = Category::getCate3ByCate1Id($conn, 1);
 ?>
 
@@ -18,13 +18,13 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav menu__container">
                 <li class="nav-item">
-                    <a class="nav-link <?php echo $priceType == "A" ? "active" : "" ?>" href="distributor.php?price_type=A"><h5>ตัวแทนสต๊อก</h5></a>
+                    <a class="nav-link <?php echo $priceType == "A" ? "active" : "" ?>" href="distributor.php?priceType=A"><h5>ตัวแทนสต๊อก</h5></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo $priceType == "B" ? "active" : "" ?>" href="distributor.php?price_type=B"><h5>ตัวแทนไม่สต๊อก</h5></a>
+                    <a class="nav-link <?php echo $priceType == "B" ? "active" : "" ?>" href="distributor.php?priceType=B"><h5>ตัวแทนไม่สต๊อก</h5></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo $priceType == "C" ? "active" : "" ?>" href="distributor.php?price_type=C"><h5>ราคาปลีก</h5></a>
+                    <a class="nav-link <?php echo $priceType == "C" ? "active" : "" ?>" href="distributor.php?priceType=C"><h5>ราคาปลีก</h5></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../admin/page_main.php"><h5>กลับหน้า Admin</h5></a>
@@ -36,7 +36,7 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
                     <a class="nav-link"a href="quotation_new.php"><h5>ทำใบเสนอใหม่</h5></a>
                 </li>
             </ul>
-            <a class="fas fa-shopping-basket fa-2x shopping-icon" href="#">
+            <a class="fas fa-shopping-basket fa-2x shopping-icon" href="<?php echo MAIN ?>/seller/product-picker.php">
                 <div id="productReservedCount" class="product-count">0</div>
             </a>
         </div>
