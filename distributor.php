@@ -76,7 +76,7 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
                             product-uid="{{product_uid}}"
                             product-detail="{{product_opt_dimension}}"
                             product-price="{{price}}"
-                            image-src="<?php echo MAIN ?>pic/product/{{../../productName}}/{{../product_code}}/{{../product_name2}}^{{option_index}}_main.jpg">
+                            image-src="pic/product/{{../../productName}}/{{../product_code}}/{{../product_name2}}^{{option_index}}_main.jpg">
                         จองสินค้า
                         </button>
                     </li>
@@ -109,7 +109,7 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
                     product-uid="{{product_uid}}" 
                     product-detail="{{product_code}}"
                     product-price="{{price}}"
-                    image-src="<?php echo MAIN ?>pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^{{option_index}}_main.jpg">
+                    image-src="pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^{{option_index}}_main.jpg">
                 จองสินค้า
                 </button>
             </li>
