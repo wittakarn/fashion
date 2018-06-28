@@ -1,9 +1,11 @@
+var $productPickerForm;
 var $researveProductPlaceholder;
 var $summaryPriceDisplay;
 var $summaryPriceInputHidden;
 var researveProductTemplate;
 
 function init(options) {
+    $productPickerForm = $('#productPickerForm');
     $researveProductPlaceholder = $('#researveProductPlaceholder');
     researveProductTemplate = Handlebars.compile($('#researveProductTemplate').html());
     displayAllReserveProduct();
@@ -23,7 +25,8 @@ function displayAllReserveProduct() {
     products.forEach(function (product) {
         summary += Number(product.productPrice) * Number(product.quantity);
     });
-    products.summary = summary.formatMoney(2, '.', ',');
+    products.summaryDisplay = summary.formatMoney(2, '.', ',');
+    products.summary = summary;
     $researveProductPlaceholder.html(researveProductTemplate(products));
     $summaryPriceDisplay = $('#summaryPriceDisplay');
     $summaryPriceInputHidden = $('#summaryPriceInputHidden');
@@ -40,6 +43,7 @@ function bindEvent() {
     $quantityIconMinus.click(decreaseQuantity);
     $quantityInputs.change(updateReserveProduct);
     $removeButton.click(removeReserveProduct);
+    $('.quotation-button').click(submit);
 }
 
 function decreaseQuantity() {
@@ -125,10 +129,16 @@ function updateProductLocalStorageSummary(products) {
     products.forEach(function (product) {
         summary += Number(product.productPrice) * Number(product.quantity);
     });
-    products.summary = summary.formatMoney(2, '.', ',');
-    $summaryPriceDisplay.html(products.summary);
+    products.summary = summary;
+    $summaryPriceDisplay.html(products.summary.formatMoney(2, '.', ','));
     $summaryPriceInputHidden.val(products.summary);
     localStorage.products = JSON.stringify(products);
+}
+
+function submit() {
+    $productPickerForm.submit();
+    localStorage.products = "[]";
+    displayAllReserveProduct();
 }
 
 Number.prototype.formatMoney = function (c, d, t) {

@@ -95,7 +95,7 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
         </a>
         <ul class="product-opt__container product-opt__container bgg-brown">
             <li class="product-opt__detail product-opt__detail--code">
-                {{product_code}}
+                {{product_code}}^{{option_index}}
             </li>
             <li class="product-opt__detail product-opt__detail--amount">
                 {{amount}}
@@ -107,7 +107,7 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
                 <button type="button" 
                     class="btn btn-green reserve-button" 
                     product-uid="{{product_uid}}" 
-                    product-detail="{{product_code}}"
+                    product-detail="{{product_code}}^{{option_index}}"
                     product-price="{{price}}"
                     image-src="pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^{{option_index}}_main.jpg">
                 จองสินค้า

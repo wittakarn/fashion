@@ -175,69 +175,14 @@ class QuotDetailPDF extends TCPDF {
         }
     }
 
-    public function generateQuotationDetailTableFooter($user, $footerData) {
+    public function generateQuotationDetailTableFooter($summaryPrice) {
+        $this->SetFont('', 'B', 18);
         $columnWidth = 5;
-        $this->SetFont('', 'B', 11);
         $this->MultiCell($this->columnWidth[0], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
         $this->MultiCell($this->columnWidth[1], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[2], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[3], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[4], $columnWidth, 'จำนวนเงิน', 0, 'R', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[5], $columnWidth, number_format($footerData['total_price'], 2), 'LRB', 'R', 0, 0, '', '', true, 0);
+        $this->MultiCell($this->columnWidth[2] + $this->columnWidth[3], $columnWidth, 'จำนวนเงิน', 0, 'R', 0, 0, '', '', true, 0);
+        $this->MultiCell($this->columnWidth[4] + $this->columnWidth[5], $columnWidth, number_format((double)$summaryPrice, 2), 'LRB', 'R', 0, 0, '', '', true, 0);
         $this->Ln();
-
-
-        $this->MultiCell($this->columnWidth[0] + $this->columnWidth[1], $columnWidth, 'กำหนดชำระเงิน...........................................................................................' . "\n" . 'TERM OF PAYMENT.', 0, 'L', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[2], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[3], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-
-        $vatLabel = "";
-        $vatValue = "";
-        if ($footerData['vat_price'] > 0) {
-            $vatLabel = 'VAT ' . THAI_VAT . ' %';
-            $vatValue = number_format($footerData['vat_price'], 2);
-        }
-
-        $this->MultiCell($this->columnWidth[4], $columnWidth, $vatLabel, 0, 'R', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[5], $columnWidth, $vatValue, 'LRB', 'R', 0, 0, '', '', true, 0);
-        $this->Ln();
-
-        $this->SetFont('', 'B', 15);
-        $this->MultiCell($this->columnWidth[0], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[1], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[2] + $this->columnWidth[3] + $this->columnWidth[4], $columnWidth, 'รวมจำนวนเงิน(บาท)', 0, 'R', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[5], $columnWidth, number_format($footerData['net_price'], 2), 'LRB', 'R', 0, 0, '', '', true, 0);
-        $this->Ln();
-
-        $this->SetFont('', '', 12);
-        $this->MultiCell($this->columnWidth[0] + $this->columnWidth[1], $columnWidth, 'กำหนดส่งของ.....................................................................................................', 0, 'L', 0, 0, '', '', true, 0);
-
-        $this->Ln();
-        $this->MultiCell($this->columnWidth[0] + $this->columnWidth[1], $columnWidth, 'หมายเหตุ', 0, 'L', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[2] + $this->columnWidth[3] + $this->columnWidth[4] + $this->columnWidth[5], $columnWidth, 'เสนอโดย ' . $user["user_name"], 0, 'R', 0, 0, '', '', true, 0);
-        $this->Ln();
-        $this->MultiCell($this->columnWidth[0] + $this->columnWidth[1], $columnWidth, '............................................................................................................................', 0, 'L', 0, 0, '', '', true, 0);
-        $this->Ln();
-        $this->Cell(array_sum($this->columnWidth), 0, '', 'T');
-        $this->Ln(0.3, false);
-        $this->SetFont('', 'B', 13);
-        $this->MultiCell($this->columnWidth[0], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[1], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[2], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[3], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[4] + $this->columnWidth[5], $columnWidth, 'บจ.ธนพรอิเล็คทริค', 0, 'L', 0, 0, '', '', true, 0);
-        $this->Ln();
-        $this->MultiCell($this->columnWidth[0], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[1], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[2], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[3], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[4] + $this->columnWidth[5], $columnWidth, 'TanapondElectric Co,Ltd.', 0, 'L', 0, 0, '', '', true, 0);
-        $this->Ln();
-        $this->MultiCell($this->columnWidth[0], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[1], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[2], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        $this->MultiCell($this->columnWidth[3], $columnWidth, '', 0, 'C', 0, 0, '', '', true, 0);
-        //$this->MultiCell($this->columnWidth[4] + $this->columnWidth[5], $columnWidth, 'By : ', 0, 'L', 0, 0, '', '', true, 0);
     }
 
     public function generateProductImage($img, $headerHeight, $paddingX, $paddingY) {

@@ -19,6 +19,7 @@ try {
     $productTotalPrices = Helper::getDefaultValue(filter_input(INPUT_POST, 'productTotalPrice', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY), null);
     $quantities = Helper::getDefaultValue(filter_input(INPUT_POST, 'quantity', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY), null);
     $imageSrcs = Helper::getDefaultValue(filter_input(INPUT_POST, 'imageSrc', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY), null);
+    $summaryPrice = Helper::getDefaultValue(filter_input(INPUT_POST, 'summaryPrice', FILTER_DEFAULT), null);
 
 //    var_dump($productUids);
 //    var_dump($productDetails);
@@ -77,7 +78,7 @@ try {
     $pdf->generateQuotationDetailTable($detailResults);
 
     // print table footer
-    // $pdf->generateQuotationDetailTableFooter($user, $masterResult);
+     $pdf->generateQuotationDetailTableFooter($summaryPrice);
     // close and output PDF document
     $pdf->Output('quotation-detail.pdf', 'I');
 } catch (PDOException $e) {

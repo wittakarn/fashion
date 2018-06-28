@@ -34,7 +34,7 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
         <?php
         include(DOCUMENT_ROOT . "/include/brand.php");
         ?>
-        <form method="POST" action="report/quotation.php">
+        <form id="productPickerForm" method="POST" action="report/quotation.php" target="_blank">
             <div class="container-fluid researve-product__container bg-brown" id="researveProductPlaceholder">
             </div>
         </form>
@@ -46,13 +46,13 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
             <span class="summary-data">ราคารวม</span>
         </li>
         <li class="researve-product__detail researve-product__detail--summary-price">
-            <span class="summary-data" id="summaryPriceDisplay">{{summary}}</span>
+            <span class="summary-data" id="summaryPriceDisplay">{{summaryDisplay}}</span>
             <span class="summary-data">บาท</span>
-            <button type="submit" 
+            <button type="button" 
                 class="btn btn-green quotation-button">
             ออกใบเสนอราคา
             </button>
-            <input type="hidden" id="summaryPriceInputHidden" name="summaryPrice[]" value={{productUid}}/>
+            <input type="hidden" id="summaryPriceInputHidden" name="summaryPrice" value={{summary}}/>
         </li>
     </ul>
     {{#each this}}
