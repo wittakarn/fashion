@@ -10,7 +10,12 @@ require_once DOCUMENT_ROOT . '/report/tcpdf/tcpdf.php';
 class QuotDetailPDF extends TCPDF {
 
     public $columnWidth = array(10, 60, 40, 20, 20, 20);
+    private $quotationNumber;
 
+    public function setQuotationNumber($quotNo){
+        $this->quotationNumber = $quotNo;
+    }
+    
     //Page header
     public function Header() {
         // Logo
@@ -19,7 +24,7 @@ class QuotDetailPDF extends TCPDF {
         // Set font
         $this->SetFont('', 'B', 20);
         // Title
-        $this->Cell(0, 16, 'ใบเสนอราคา', 0, 2, 'R', 0, '', 0, false, 'M', 'B');
+        $this->Cell(0, 16, "ใบเสนอราคา - {$this->quotationNumber}", 0, 2, 'C', 0, '', 0, false, 'M', 'B');
     }
 
     // Page footer

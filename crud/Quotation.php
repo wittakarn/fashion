@@ -45,6 +45,7 @@ class Quotation {
             }
             $conn = null;
         }
+        return $quotNo;
     }
 
 }
