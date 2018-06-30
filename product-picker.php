@@ -34,7 +34,7 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
         <?php
         include(DOCUMENT_ROOT . "/include/brand.php");
         ?>
-        <form id="productPickerForm" method="POST" action="report/quotation.php" target="_blank">
+        <form id="productPickerForm" method="POST" action="report/quotation.php?submitKey=<?php echo rand(); ?>" target="_blank">
             <div class="container-fluid researve-product__container bg-brown" id="researveProductPlaceholder">
             </div>
         </form>

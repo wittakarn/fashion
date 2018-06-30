@@ -6,11 +6,10 @@ error_reporting(E_ALL);
 require_once "../config.php";
 require_once DOCUMENT_ROOT . '/connection.php';
 require_once DOCUMENT_ROOT . '/class/Helper.php';
+require_once DOCUMENT_ROOT . '/crud/Quotation.php';
 require_once DOCUMENT_ROOT . '/report/QuotDetailPDF.php';
 require_once DOCUMENT_ROOT . '/report/tcpdf/tcpdf_config.php';
 require_once DOCUMENT_ROOT . '/report/tcpdf/tcpdf.php';
-
-$conn = DataBaseConnection::createConnect();
 
 try {
     $productUids = Helper::getDefaultValue(filter_input(INPUT_POST, 'productUid', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY), null);
@@ -20,6 +19,7 @@ try {
     $quantities = Helper::getDefaultValue(filter_input(INPUT_POST, 'quantity', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY), null);
     $imageSrcs = Helper::getDefaultValue(filter_input(INPUT_POST, 'imageSrc', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY), null);
     $summaryPrice = Helper::getDefaultValue(filter_input(INPUT_POST, 'summaryPrice', FILTER_DEFAULT), null);
+    $submitKey = Helper::getDefaultValue(filter_input(INPUT_GET, 'submitKey', FILTER_DEFAULT), null);
 
 //    var_dump($productUids);
 //    var_dump($productDetails);
@@ -27,20 +27,23 @@ try {
 //    var_dump($productTotalPrices);
 //    var_dump($quantities);
 //    var_dump($imageSrcs);
-    
+
     $detailResults = array();
     $rowSize = $productUids != null ? count($productUids) : 0;
 
     for ($i = 0; $i < $rowSize; $i++) {
         $detailResults[$i]['sequence'] = $i + 1;
-        $detailResults[$i]['productUid'] = $productUids[$i];
-        $detailResults[$i]['productDetail'] = $productDetails[$i];
-        $detailResults[$i]['productPrice'] = $productPrices[$i];
-        $detailResults[$i]['productTotalPrice'] = $productTotalPrices[$i];
+        $detailResults[$i]['product_uid'] = $productUids[$i];
+        $detailResults[$i]['product_detail'] = $productDetails[$i];
+        $detailResults[$i]['price'] = $productPrices[$i];
+        $detailResults[$i]['total_price'] = $productTotalPrices[$i];
         $detailResults[$i]['quantity'] = $quantities[$i];
-        $detailResults[$i]['imageSrc'] = $imageSrcs[$i];
+        $detailResults[$i]['image_path'] = $imageSrcs[$i];
     }
-    
+    if (!isset($_SESSION['submitKey']) || $_SESSION['submitKey'] != $submitKey) {
+        Quotation::create($summaryPrice, $detailResults);
+        $_SESSION['submitKey'] = $submitKey;
+    }
     // create new PDF document
     $pdf = new QuotDetailPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -78,10 +81,11 @@ try {
     $pdf->generateQuotationDetailTable($detailResults);
 
     // print table footer
-     $pdf->generateQuotationDetailTableFooter($summaryPrice);
+    $pdf->generateQuotationDetailTableFooter($summaryPrice);
     // close and output PDF document
     $pdf->Output('quotation-detail.pdf', 'I');
 } catch (PDOException $e) {
+    unset($_SESSION['submitKey']);
     echo "Failed: " . $e->getMessage();
 }
 $conn = null;

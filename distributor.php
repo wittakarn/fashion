@@ -35,6 +35,7 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
         <?php
         include(DOCUMENT_ROOT . "/include/brand.php");
         ?>
+        <?php var_dump($_SESSION); ?>
         <div class="container-fluid bg-brown" id="productOptionPlaceholder"></div>
         <div class="container-fluid bg-brown">
             <ul class="product-row" id="productPlaceholder"></ul>
@@ -72,12 +73,12 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
                     </li>
                     <li class="product-opt__detail product-opt__detail--reserve">
                         <button type="button" 
-                            class="btn btn-green reserve-button" 
-                            product-uid="{{product_uid}}"
-                            product-detail="{{product_opt_dimension}}"
-                            product-price="{{price}}"
-                            image-src="pic/product/{{../../productName}}/{{../product_code}}/{{../product_name2}}^{{option_index}}_main.jpg">
-                        จองสินค้า
+                                class="btn btn-green reserve-button" 
+                                product-uid="{{product_uid}}"
+                                product-detail="{{product_opt_dimension}}"
+                                product-price="{{price}}"
+                                image-src="pic/product/{{../../productName}}/{{../product_code}}/{{../product_name2}}^{{option_index}}_main.jpg">
+                            จองสินค้า
                         </button>
                     </li>
                 </ul>
@@ -105,12 +106,12 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
             </li>
             <li class="product-opt__detail product-opt__detail--reserve">
                 <button type="button" 
-                    class="btn btn-green reserve-button" 
-                    product-uid="{{product_uid}}" 
-                    product-detail="{{product_code}}^{{option_index}}"
-                    product-price="{{price}}"
-                    image-src="pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^{{option_index}}_main.jpg">
-                จองสินค้า
+                        class="btn btn-green reserve-button" 
+                        product-uid="{{product_uid}}" 
+                        product-detail="{{product_code}}^{{option_index}}"
+                        product-price="{{price}}"
+                        image-src="pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^{{option_index}}_main.jpg">
+                    จองสินค้า
                 </button>
             </li>
         </ul>

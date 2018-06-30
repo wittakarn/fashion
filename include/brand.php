@@ -1,12 +1,14 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+session_start();
 require_once('config.php');
 require_once('connection.php');
 require_once(DOCUMENT_ROOT . '/class/Category.php');
 require_once(DOCUMENT_ROOT . '/class/Helper.php');
 $imageRoot = MAIN;
-$priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'priceType'), "A");
+$isAdmin = isset($_SESSION['admin_login']) ? $_SESSION['admin_login'] : false;
+$priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'priceType'), null);
 $category3s = Category::getCate3ByCate1Id($conn, 1);
 ?>
 
@@ -17,23 +19,51 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
         </button>
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav menu__container">
-                <li class="nav-item">
-                    <a class="nav-link <?php echo $priceType == "A" ? "active" : "" ?>" href="distributor.php?priceType=A"><h5>ตัวแทนสต๊อก</h5></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo $priceType == "B" ? "active" : "" ?>" href="distributor.php?priceType=B"><h5>ตัวแทนไม่สต๊อก</h5></a>
-                </li>
+                <?php
+                if ($isAdmin) {
+                    if ($priceType == null) {
+                        $priceType = "A";
+                    }
+                    echo '<li class="nav-item">
+                                <a class="nav-link ' . ($priceType == "S" ? "active" : "") . '" href="distributor.php?priceType=S"><h5>ตัวแทนสต๊อก[30+]</h5></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link ' . ($priceType == "A" ? "active" : "") . '" href="distributor.php?priceType=A"><h5>ตัวแทนสต๊อก[5+]</h5></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link ' . ($priceType == "B" ? "active" : "") . '" href="distributor.php?priceType=B"><h5>ตัวแทนไม่สต๊อก</h5></a>
+                            </li>';
+                } else {
+                    $memberClass = isset($_SESSION['member_class']) ? $_SESSION['member_class'] : null;
+                    if ("A" == $memberClass) {
+                        if ("S" != $priceType && "C" != $priceType) {
+                            $priceType = "S";
+                        }
+                        echo '<li class="nav-item">
+                                    <a class="nav-link ' . ($priceType == "S" ? "active" : "") . '" href="distributor.php?priceType=S"><h5>ตัวแทนสต๊อก[30+]</h5></a>
+                                </li>';
+                    } else if ("A" == $memberClass) {
+                        if ("A" != $priceType && "C" != $priceType) {
+                            $priceType = "A";
+                        }
+                        echo '<li class="nav-item">
+                                    <a class="nav-link ' . ($priceType == "A" ? "active" : "") . '" href="distributor.php?priceType=A"><h5>ตัวแทนสต๊อก[5+]</h5></a>
+                                </li>';
+                    } else if ("B" == $memberClass) {
+                        if ("B" != $priceType && "C" != $priceType) {
+                            $priceType = "B";
+                        }
+                        echo '<li class="nav-item">
+                                    <a class="nav-link ' . ($priceType == "B" ? "active" : "") . '" href="distributor.php?priceType=B"><h5>ตัวแทนไม่สต๊อก</h5></a>
+                                </li>';
+                    }
+                }
+                ?>
                 <li class="nav-item">
                     <a class="nav-link <?php echo $priceType == "C" ? "active" : "" ?>" href="distributor.php?priceType=C"><h5>ราคาปลีก</h5></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../admin/page_main.php"><h5>กลับหน้า Admin</h5></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="quotation_old.php"><h5>ทำใบเสนอเก่า</h5></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"a href="quotation_new.php"><h5>ทำใบเสนอใหม่</h5></a>
                 </li>
             </ul>
             <a class="fas fa-shopping-basket fa-2x shopping-icon" href="<?php echo MAIN ?>/seller/product-picker.php">

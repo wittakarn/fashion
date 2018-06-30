@@ -165,11 +165,11 @@ class QuotDetailPDF extends TCPDF {
 
             $this->MultiCell($this->columnWidth[0], $columnheight, $rocolumnWidth['sequence'], $borderStyle, 'R', $fill, 0, '', '', true, 0);
             $this->MultiCell($this->columnWidth[1], $columnheight, '', $borderStyle, 'C', $fill, 0, '', '', true, 0);
-            $this->generateProductImage(MAIN . $rocolumnWidth['imageSrc'], $headerHeight, 17, 50 * $rowIndexPerPage++);
-            $this->MultiCell($this->columnWidth[2], $columnheight, $rocolumnWidth['productDetail'], $borderStyle, 'L', $fill, 0, '', '', true, 0);
+            $this->generateProductImage(MAIN . $rocolumnWidth['image_path'], $headerHeight, 17, 50 * $rowIndexPerPage++);
+            $this->MultiCell($this->columnWidth[2], $columnheight, $rocolumnWidth['product_detail'], $borderStyle, 'L', $fill, 0, '', '', true, 0);
             $this->MultiCell($this->columnWidth[3], $columnheight, number_format($rocolumnWidth['quantity'], 1), $borderStyle, 'R', $fill, 0, '', '', true, 0);
-            $this->MultiCell($this->columnWidth[4], $columnheight, number_format($rocolumnWidth['productPrice'], 2), $borderStyle, 'R', $fill, 0, '', '', true, 0);
-            $this->MultiCell($this->columnWidth[5], $columnheight, number_format($rocolumnWidth['productTotalPrice'], 2), $borderStyle, 'R', $fill, 0, '', '', true, 0);
+            $this->MultiCell($this->columnWidth[4], $columnheight, number_format($rocolumnWidth['price'], 2), $borderStyle, 'R', $fill, 0, '', '', true, 0);
+            $this->MultiCell($this->columnWidth[5], $columnheight, number_format($rocolumnWidth['total_price'], 2), $borderStyle, 'R', $fill, 0, '', '', true, 0);
             $this->Ln();
             $rowLimit--;
         }
