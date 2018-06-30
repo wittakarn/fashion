@@ -35,7 +35,6 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
         <?php
         include(DOCUMENT_ROOT . "/include/brand.php");
         ?>
-        <?php var_dump($_SESSION); ?>
         <div class="container-fluid bg-brown" id="productOptionPlaceholder"></div>
         <div class="container-fluid bg-brown">
             <ul class="product-row" id="productPlaceholder"></ul>

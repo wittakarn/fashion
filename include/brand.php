@@ -2,6 +2,12 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
+
+if (!isset($_SESSION['admin_name']) && !isset($_SESSION['member_name'])) {
+    header('Location: ' . MAIN);
+    exit();
+}
+
 require_once('config.php');
 require_once('connection.php');
 require_once(DOCUMENT_ROOT . '/class/Category.php');
