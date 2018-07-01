@@ -68,10 +68,23 @@ ul.product-opt__container {
     position: absolute;
     bottom: -10px;
     left: 10px;
-    width: 30%;
+    padding: 0 10px;
     box-shadow: 1px 1px 2px #888;
-    background-color: #0ABDA0;
+    background-color: #0abda0;
     text-align: center;
+    color: #ebf2ea;
+}
+
+.product-opt__stock {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 10px;
+    box-shadow: 1px 1px 2px #888;
+    background-color: #bf9d7a;
+    text-align: center;
+    color: #ebf2ea;
 }
 
 .product-opt.product-opt__image {

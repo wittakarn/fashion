@@ -59,13 +59,11 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
                 <div class="product-opt__container--image">
                     <img class="product-opt product-opt__image" src="<?php echo MAIN ?>pic/product/{{../../productName}}/{{../product_code}}/{{../product_name2}}^{{option_index}}_main.jpg"/>
                     <div class="product-opt product-opt__code">{{product_opt_code}}</div>
+                    <div class="product-opt product-opt__stock">{{stock}}</div>
                 </div>
                 <ul class="product-opt__container product-opt__container--detail">
                     <li class="product-opt__detail product-opt__detail--dimension">
                         {{product_opt_dimension}}
-                    </li>
-                    <li class="product-opt__detail product-opt__detail--costcn">
-                        {{product_opt_costcn}}
                     </li>
                     <li class="product-opt__detail product-opt__detail--price">
                         {{price}}
@@ -74,7 +72,7 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
                         <button type="button" 
                                 class="btn btn-green reserve-button" 
                                 product-uid="{{product_uid}}"
-                                product-detail="{{product_opt_dimension}}"
+                                product-detail="{{product_opt_code}}, {{product_opt_dimension}}"
                                 product-price="{{price}}"
                                 image-src="pic/product/{{../../productName}}/{{../product_code}}/{{../product_name2}}^{{option_index}}_main.jpg">
                             จองสินค้า
@@ -92,13 +90,12 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
     <li class="product__column product__column--main">
         <a class="product__link" target="_blank" href="<?php echo MAIN ?>distributor.php?show=detail&product_id={{product_id}}&product_sub={{option_index}}&cate3_id={{../cate3Id}}&cate3_name={{../productName}}">
             <img class="product__link--image" src="<?php echo MAIN ?>pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^{{option_index}}_main.jpg"/>
+            <div class="product-opt product-opt__code">{{product_code}}^{{option_index}}</div>
+            <div class="product-opt product-opt__stock">{{stock}}</div>
         </a>
-        <ul class="product-opt__container product-opt__container bgg-brown">
+        <ul class="product-opt__container product-opt__container--detail bgg-brown">
             <li class="product-opt__detail product-opt__detail--code">
-                {{product_code}}^{{option_index}}
-            </li>
-            <li class="product-opt__detail product-opt__detail--amount">
-                {{amount}}
+                {{product_dimension}}
             </li>
             <li class="product-opt__detail product-opt__detail--price">
                 {{price}}
@@ -107,7 +104,7 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
                 <button type="button" 
                         class="btn btn-green reserve-button" 
                         product-uid="{{product_uid}}" 
-                        product-detail="{{product_code}}^{{option_index}}"
+                        product-detail="{{product_code}}^{{option_index}}, {{product_dimension}}"
                         product-price="{{price}}"
                         image-src="pic/product/{{../productName}}/{{product_code}}/{{product_name2}}^{{option_index}}_main.jpg">
                     จองสินค้า
