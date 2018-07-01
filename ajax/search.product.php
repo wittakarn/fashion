@@ -19,7 +19,7 @@ try {
     $result = array();
     $conn = DataBaseConnection::createConnect();
     $productResults = Product::getProductByCate3Id($conn, $_REQUEST['cate3Id'], $_REQUEST['pos'], $_REQUEST['size']);
-    $needDoublePrice = $priceType != "C" && ($cate3Name == "peach" || $cate3Name == "bettyboop" || $cate3Name == "benbobear");
+    $needDoublePrice = false; // $priceType != "C" && ($cate3Name == "peach" || $cate3Name == "bettyboop" || $cate3Name == "benbobear");
     foreach ($productResults as &$productResult) {
         $productId = $productResult['product_id'];
         $productDetail = ProductDetail::getProduct($conn, $productId);

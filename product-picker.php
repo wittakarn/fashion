@@ -18,7 +18,7 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>ขายสินค้า</title>
+        <title>สั่งสินค้า</title>
         <link rel="stylesheet" href="<?php echo ROOT; ?>/lib-css/bootstrap.min.css"/>
         <link rel="stylesheet" href="<?php echo ROOT; ?>/lib-css/fontawesome-all.min.css"/>
         <link rel="stylesheet" href="<?php echo ROOT; ?>/css/product-picker.css"/>
