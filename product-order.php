@@ -38,7 +38,8 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
                     <thead>
                         <tr>
                             <th scope="col">เลขที่บิล</th>
-                            <th scope="col">พิมพ์ไปแล้ว</th>
+                            <th scope="col">วัน/เวลา</th>
+                            <th scope="col" class="text-center">พิมพ์ไปแล้ว</th>
                             <th scope="col">ชื่อผู้ส่งสินค้า</th>
                             <th scope="col">ชื่อผู้รับสินค้า</th>
                             <th scope="col">Tracking</th>
@@ -62,7 +63,12 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
             {{order_purchase_id}}
             </a>
         </td>
-        <td>{{order_purchase_count_print}}</td>
+        <td>
+            <p>{{dateTime}}</p>
+        </td>
+        <td>
+            <p class="text-center">{{order_purchase_count_print}}</p>
+        </td>
         <td>
             <p>{{member.member_name}}</p>
             <p>{{member.member_phone}}</p>
@@ -76,7 +82,16 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
             <p>{{customer.customer_contact_fb}}</p>
         </td>
         <td>{{order_purchase_tracking}}</td>
-        <td>---</td>
+        <td>
+            <ul class="product-detail__container">
+                {{#each images}}
+                <li class="product-image__row">
+                    <img class="product-image__picture" src="<?php echo MAIN ?>{{imageSrc}}"/>
+                    <p class="text-center">{{stock}}</p>
+                </li>
+                {{/each}}
+            </ul>
+        </td>
     </tr>
     {{/each}}
 </script>

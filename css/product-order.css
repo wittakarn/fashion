@@ -13,3 +13,21 @@ and open the template in the editor.
     margin: 0 auto;
     width: 8%;
 }
+
+.product-detail__container {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 250px;
+}
+
+.product-image__row {
+    padding: 3px;
+    width: 60px;
+}
+
+.product-image__picture {
+    display: inline-block;
+    width: 100%;
+}
