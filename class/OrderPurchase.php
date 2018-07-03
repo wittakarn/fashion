@@ -12,6 +12,21 @@ class OrderPurchase {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function countDuplicateOrder($conn, $customerName, $timestampMin, $timestampMax) {
+        $query = "SELECT count(*) count FROM order_purchase o, customer c ";
+        $where = "WHERE o.customer_id = c.customer_id "
+                . "AND c.customer_name = :customer_name "
+                . "AND o.order_purchase_adddate > :order_purchase_adddate_min "
+                . "AND o.order_purchase_adddate < :order_purchase_adddate_max ";
+        $stmt = $conn->prepare($query . $where);
+        $stmt->bindParam(":customer_name", $customerName, PDO::PARAM_STR);
+        $stmt->bindParam(":order_purchase_adddate_min", $timestampMin, PDO::PARAM_STR);
+        $stmt->bindParam(":order_purchase_adddate_max", $timestampMax, PDO::PARAM_STR);
+
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 }
 
 ?>

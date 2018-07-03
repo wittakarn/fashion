@@ -17,9 +17,16 @@ try {
     $conn = DataBaseConnection::createConnect();
     $orders = OrderPurchase::getAll($conn, $_REQUEST['pos'], $_REQUEST['size']);
     foreach ($orders as &$order) {
-        $order['dateTime'] = date('d/m/Y H:i:s', strtotime($order['order_purchase_adddate']));
+        $purchaseDate = strtotime($order['order_purchase_adddate']);
+//        $purchaseDate_1 = date('d/m/Y H:i:s', strtotime(' -1 days', $purchaseDate));
+//        $purchaseDate_2 = date('d/m/Y H:i:s', strtotime(' -2 days', $purchaseDate));
+//        $order['timestamp-1'] = date('YmdHi', strtotime(' -1 days', $purchaseDate));
+//        $order['timestamp-2'] = date('YmdHi', strtotime(' -2 days', $purchaseDate));
+        $order['dateTime'] = date('d/m/Y H:i:s', $purchaseDate);
         $order['member'] = Member::get($conn, $order['member_id']);
         $order['customer'] = Customer::get($conn, $order['customer_id']);
+        $duplicate = OrderPurchase::countDuplicateOrder($conn, $order['customer']['customer_name'], date('YmdHi', strtotime(' -3 days', $purchaseDate)), $order['order_purchase_adddate']);
+        $order['isDuplicate'] = $duplicate['count'] > 0;
         $purchaseDetails = OrderPurchaseDetail::getByOrderPurchaseId($conn, $order['order_purchase_id']);
         $images = array();
         foreach ($purchaseDetails as &$purchaseDetail) {

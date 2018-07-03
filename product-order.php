@@ -57,7 +57,7 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
 </html>
 <script id="orderTemplate" type="text/x-handlebars-template">
     {{#each this}}
-    <tr>
+    <tr {{#if isDuplicate}}class="bg-danger"{{/if}}>
         <td>
             <a class="text-white font-weight-bold" href="<?php echo MAIN; ?>admin/order_purchase_all.php?po={{order_purchase_id}}" target="_blank">
             {{order_purchase_id}}
