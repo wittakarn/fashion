@@ -31,44 +31,82 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
     </head>
 
     <body>
-        <div class="container">
-            <div class="card">
-                <div class="card-header">เลขที่ใบเสนอราคา</div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-2">
-                            <input type="text" class="form-control" id="quotationInput">
-                        </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-primary" id="fetchDataButton">ดึงข้อมูล</button>
+        <form>
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">เลขที่ใบเสนอราคา</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-2">
+                                <input type="text" class="form-control" id="quotationInput">
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary" id="fetchDataButton">ดึงข้อมูล</button>
+                            </div>
                         </div>
                     </div>
+                    <div id="quotationMastPlaceholder" class="card-footer">
+                    </div>
+                </div>
+                <div class="table-responsive-md">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">ลำดับ</th>
+                                <th scope="col">รหัส</th>
+                                <th scope="col" class="text-center">จำนวน</th>
+                                <th scope="col">ราคา</th>
+                                <th scope="col">รวม</th>
+                            </tr>
+                        </thead>
+                        <tbody id="quotationDetailPlaceholder">
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="table-responsive-md">
-                <table class="table table-dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">ลำดับ</th>
-                            <th scope="col">รหัส</th>
-                            <th scope="col" class="text-center">จำนวน</th>
-                            <th scope="col">ราคา</th>
-                            <th scope="col">รวม</th>
-                        </tr>
-                    </thead>
-                    <tbody id="quotationDetailPlaceholder">
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <img src="<?php echo WEB_ROOT ?>/image/loading.gif" class="scroll-check-point invisible"/>
+        </form>
     </body>
 </html>
+<script id="quotationMastTemplate" type="text/x-handlebars-template">
+    <div class="row">
+        <div class="col-2">
+            member
+        </div>
+        <div class="col-2">
+            {{this.user}}
+            <input type="hidden" name="productUid[]" value="{{product_uid}}"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            เลขที่บิล
+        </div>
+        <div class="col-2">
+            {{this.quot_no}}
+        </div>
+        <div class="col-2">
+            ราคารวม
+        </div>
+        <div class="col-2">
+            {{this.summary_price}}
+        </div>
+        <div class="col-2">
+            วันที่
+        </div>
+        <div class="col-2">
+            {{this.date}}
+        </div>
+    </div>
+</script>
 <script id="quotationDetailTemplate" type="text/x-handlebars-template">
-    {{#each this.quotDetail}}
+    {{#each this}}
     <tr>
-        <td>{{sequence}}</td>
+        <td>
+            {{sequence}}
+            <input type="hidden" name="productUid[]" value="{{product_uid}}"/>
+            <input type="hidden" name="quantity[]" value="{{quantity}}"/>
+        </td>
         <td>{{product_uid}}</td>
         <td>{{quantity}}</td>
         <td>{{price}}</td>

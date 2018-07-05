@@ -1,16 +1,20 @@
 var quotationDetailTemplate;
+var quotationMastTemplate;
 var $window = $(window);
 var $quotationDetailPlaceholder;
+var $quotationMastPlaceholder;
 var $quotationInput;
 var $fetchDataButton;
 var fetcher;
 
 function init(options) {
+    $quotationMastPlaceholder = $('#quotationMastPlaceholder');
     $quotationDetailPlaceholder = $('#quotationDetailPlaceholder');
     $quotationInput = $('#quotationInput');
     $fetchDataButton = $('#fetchDataButton');
     fetcher = new Fetcher(options.quotation);
     quotationDetailTemplate = Handlebars.compile($('#quotationDetailTemplate').html());
+    quotationMastTemplate = Handlebars.compile($('#quotationMastTemplate').html());
     
     $fetchDataButton.click(fetchQuotation);
 }
@@ -22,7 +26,8 @@ function fetchQuotation(){
 }
 
 function renderQuotation(data, textStatus, xhr) {
-    $quotationDetailPlaceholder.html(quotationDetailTemplate(data));
+    $quotationDetailPlaceholder.html(quotationDetailTemplate(data.quotDetail));
+    $quotationMastPlaceholder.html(quotationMastTemplate(data.quotMast));
 }
 
 function loadMoreData(payload) {
