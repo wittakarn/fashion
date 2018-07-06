@@ -13,12 +13,14 @@ class QuotDetail {
     public function create($quotNo) {
         $params = $this->requests;
         $db = $this->dbh;
-        $query = "INSERT INTO quot_detail(quot_no, product_uid, sequence, image_path, quantity, product_detail, price, total_price) VALUES (:quot_no, :product_uid, :sequence, :image_path, :quantity, :product_detail, :price, :total_price)";
+        $query = "INSERT INTO quot_detail(quot_no, product_uid, sequence, product_id, product_sub, image_path, quantity, product_detail, price, total_price) VALUES (:quot_no, :product_uid, :sequence, :product_id, :product_sub, :image_path, :quantity, :product_detail, :price, :total_price)";
         $stmt = $db->prepare($query);
         foreach ($params as $item) {
             $stmt->bindParam(":quot_no", $quotNo, PDO::PARAM_INT);
             $stmt->bindParam(":product_uid", $item['product_uid'], PDO::PARAM_STR);
             $stmt->bindParam(":sequence", $item['sequence'], PDO::PARAM_INT);
+            $stmt->bindParam(":product_id", $item['product_uid'], PDO::PARAM_INT);
+            $stmt->bindParam(":product_sub", $item['product_sub'], PDO::PARAM_INT);
             $stmt->bindParam(":image_path", $item['image_path'], PDO::PARAM_STR);
             $stmt->bindParam(":quantity", $item['quantity'], PDO::PARAM_INT);
             $stmt->bindParam(":product_detail", $item['product_detail'], PDO::PARAM_STR);

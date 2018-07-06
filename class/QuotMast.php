@@ -13,9 +13,10 @@ class QuotMast {
     public function create() {
         $params = $this->requests;
         $db = $this->dbh;
-        $query = "INSERT INTO quot_mast(quot_no, user, date, summary_price, create_datetime) VALUES (:quot_no, :name, NOW(), :summary_price, NOW())";
+        $query = "INSERT INTO quot_mast(quot_no, member_id, user, date, summary_price, create_datetime) VALUES (:quot_no, :member_id, :name, NOW(), :summary_price, NOW())";
         $stmt = $db->prepare($query);
         $stmt->bindParam(":quot_no", $params['quot_no'], PDO::PARAM_STR);
+        $stmt->bindParam(":member_id", $params['member_id'], PDO::PARAM_INT);
         $stmt->bindParam(":name", $params['name'], PDO::PARAM_STR);
         $stmt->bindValue(":summary_price", str_replace(",", "", $params['summary_price']), PDO::PARAM_STR);
 

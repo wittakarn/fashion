@@ -28,7 +28,7 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
                 <?php
                 if ($isAdmin) {
                     if ($priceType == null) {
-                        $priceType = "A";
+                        $priceType = "S";
                     }
                     echo '<li class="nav-item">
                                 <a class="nav-link ' . ($priceType == "S" ? "active" : "") . '" href="distributor.php?priceType=S"><h5>ตัวแทนสต๊อก[30+]</h5></a>
@@ -41,7 +41,7 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
                             </li>';
                 } else {
                     $memberClass = isset($_SESSION['member_class']) ? $_SESSION['member_class'] : null;
-                    if ("A" == $memberClass) {
+                    if ("S" == $memberClass) {
                         if ("S" != $priceType && "C" != $priceType) {
                             $priceType = "S";
                         }

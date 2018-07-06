@@ -27,6 +27,9 @@ try {
     for ($i = 0; $i < $rowSize; $i++) {
         $detailResults[$i]['sequence'] = $i + 1;
         $detailResults[$i]['product_uid'] = $productUids[$i];
+        $part = explode("#", $detailResults[$i]['product_uid']);
+        $detailResults[$i]['product_id'] = $part[0];
+        $detailResults[$i]['product_sub'] = $part[1];
         $detailResults[$i]['product_detail'] = $productDetails[$i];
         $detailResults[$i]['price'] = $productPrices[$i];
         $detailResults[$i]['total_price'] = $productTotalPrices[$i];
@@ -70,7 +73,7 @@ try {
 
         // set quotation number
         $pdf->setQuotationNumber($quotNo);
-        
+
         // add a page
         $pdf->AddPage();
 

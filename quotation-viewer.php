@@ -3,11 +3,6 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 require_once('config.php');
 require_once('connection.php');
-require_once(DOCUMENT_ROOT . '/class/Helper.php');
-$conn = DataBaseConnection::createConnect();
-$imageRoot = MAIN;
-$priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'priceType'), "A");
-$extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), null);
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +26,7 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
     </head>
 
     <body>
-        <form>
+        <form method="post" target="_self" action="submit-quotation.php">
             <div class="container">
                 <div class="card">
                     <div class="card-header">เลขที่ใบเสนอราคา</div>
@@ -69,13 +64,17 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
     </body>
 </html>
 <script id="quotationMastTemplate" type="text/x-handlebars-template">
+    {{#if this}}
     <div class="row">
         <div class="col-2">
             member
+            <input type="hidden" name="memberId" value="{{this.member_id}}"/>
         </div>
         <div class="col-2">
             {{this.user}}
-            <input type="hidden" name="productUid[]" value="{{product_uid}}"/>
+        </div>
+        <div class="col-2">
+            <button type="submit" class="btn btn-primary">ขายสินค้า</button>
         </div>
     </div>
     <div class="row">
@@ -98,19 +97,21 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
             {{this.date}}
         </div>
     </div>
+    {{/if}}
 </script>
 <script id="quotationDetailTemplate" type="text/x-handlebars-template">
     {{#each this}}
     <tr>
         <td>
             {{sequence}}
-            <input type="hidden" name="productUid[]" value="{{product_uid}}"/>
+            <input type="hidden" name="productId[]" value="{{product_id}}"/>
+            <input type="hidden" name="productSub[]" value="{{product_sub}}"/>
             <input type="hidden" name="quantity[]" value="{{quantity}}"/>
         </td>
         <td>{{product_uid}}</td>
         <td>{{quantity}}</td>
-        <td>{{price}}</td>
-        <td>{{total_price}}</td>
+        <td class="text-right">{{price}}</td>
+        <td class="text-right">{{total_price}}</td>
     </tr>
     {{/each}}
 </script>

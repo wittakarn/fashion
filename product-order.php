@@ -3,11 +3,6 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 require_once('config.php');
 require_once('connection.php');
-require_once(DOCUMENT_ROOT . '/class/Helper.php');
-$conn = DataBaseConnection::createConnect();
-$imageRoot = MAIN;
-$priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'priceType'), "A");
-$extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), null);
 ?>
 
 <!DOCTYPE html>

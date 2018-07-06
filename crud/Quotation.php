@@ -13,12 +13,14 @@ require_once DOCUMENT_ROOT . '/class/QuotDetail.php';
 class Quotation {
 
     public static function create($summaryPrice, $quotDetailParam) {
-        if (isset($_SESSION['admin_name'])) {
-            $userName = $_SESSION['admin_name'];
-        } else if (isset($_SESSION['member_name'])) {
+        if (isset($_SESSION['member_name'])) {
             $userName = $_SESSION['member_name'];
         }
-        if (isset($userName)) {
+        if (isset($_SESSION['member_id'])) {
+            $memberId = $_SESSION['member_id'];
+        }
+        
+        if (isset($memberId)) {
             $conn = DataBaseConnection::createConnect();
 
             try {
@@ -27,6 +29,7 @@ class Quotation {
                 $quot = QuotNo::getMaxSequence($conn);
                 $quotNo = $quot['sequence'];
                 $quotMastParam['quot_no'] = $quotNo;
+                $quotMastParam['member_id'] = $memberId;
                 $quotMastParam['name'] = $userName;
                 $quotMastParam['summary_price'] = $summaryPrice;
 
