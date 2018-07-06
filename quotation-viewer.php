@@ -26,7 +26,7 @@ require_once('connection.php');
     </head>
 
     <body>
-        <form method="post" target="_self" action="submit-quotation.php">
+        <form method="post" target="_blank" action="submit-quotation.php">
             <div class="container">
                 <div class="card">
                     <div class="card-header">เลขที่ใบเสนอราคา</div>
@@ -44,14 +44,14 @@ require_once('connection.php');
                     </div>
                 </div>
                 <div class="table-responsive-md">
-                    <table class="table table-dark">
+                    <table class="table table-bordered table-dark">
                         <thead>
                             <tr>
-                                <th scope="col">ลำดับ</th>
-                                <th scope="col">รหัส</th>
+                                <th scope="col" class="text-center">ลำดับ</th>
+                                <th scope="col" class="text-center">รูป</th>
                                 <th scope="col" class="text-center">จำนวน</th>
-                                <th scope="col">ราคา</th>
-                                <th scope="col">รวม</th>
+                                <th scope="col" class="text-center">ราคา</th>
+                                <th scope="col" class="text-center">รวม</th>
                             </tr>
                         </thead>
                         <tbody id="quotationDetailPlaceholder">
@@ -108,8 +108,8 @@ require_once('connection.php');
             <input type="hidden" name="productSub[]" value="{{product_sub}}"/>
             <input type="hidden" name="quantity[]" value="{{quantity}}"/>
         </td>
-        <td>{{product_uid}}</td>
-        <td>{{quantity}}</td>
+        <td class="text-center"><img class="product-image" src="<?php echo MAIN; ?>{{image_path}}"/></td>
+        <td class="text-right">{{quantity}}</td>
         <td class="text-right">{{price}}</td>
         <td class="text-right">{{total_price}}</td>
     </tr>
@@ -123,3 +123,8 @@ var options = {
 };
 init(options);
 </script>
+<style>
+    .product-image {
+        width: 80px;
+    }
+</style>

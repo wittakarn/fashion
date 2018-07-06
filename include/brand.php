@@ -72,7 +72,7 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
                     <a class="nav-link" href="../admin/page_main.php"><h5>กลับหน้า Admin</h5></a>
                 </li>
             </ul>
-            <a class="fas fa-shopping-basket fa-2x shopping-icon" href="<?php echo MAIN ?>/seller/product-picker.php">
+            <a class="fas fa-shopping-basket fa-2x shopping-icon" href="<?php echo MAIN ?>seller/product-picker.php">
                 <div id="productReservedCount" class="product-count">0</div>
             </a>
         </div>

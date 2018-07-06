@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 require_once('config.php');
 require_once(DOCUMENT_ROOT . '/class/Helper.php');
 
-$memberId = Helper::getDefaultValue(filter_input(INPUT_POST, 'member_id'), null);
+$memberId = Helper::getDefaultValue(filter_input(INPUT_POST, 'memberId'), null);
 $productIds = Helper::getDefaultValue(filter_input(INPUT_POST, 'productId', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY), null);
 $productSubs = Helper::getDefaultValue(filter_input(INPUT_POST, 'productSub', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY), null);
 $quantities = Helper::getDefaultValue(filter_input(INPUT_POST, 'quantity', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY), null);
