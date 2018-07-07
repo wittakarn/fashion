@@ -11,6 +11,18 @@ class OrderPurchase {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public static function getByMemberId($conn, $memberId, $pos, $size) {
+        $query = "SELECT * FROM order_purchase ";
+        $where = "WHERE member_id = :member_id ";
+        $order = "ORDER BY order_purchase_id DESC ";
+        $limit = "LIMIT {$size} OFFSET {$pos} ";
+        $stmt = $conn->prepare($query. $where . $order . $limit);
+        $stmt->bindParam(":member_id", $memberId, PDO::PARAM_INT);
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public static function countDuplicateOrder($conn, $customerName, $timestampMin, $timestampMax) {
         $query = "SELECT count(*) count FROM order_purchase o, customer c ";

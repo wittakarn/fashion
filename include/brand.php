@@ -69,7 +69,7 @@ $category3s = Category::getCate3ByCate1Id($conn, 1);
                     <a class="nav-link <?php echo $priceType == "C" ? "active" : "" ?>" href="distributor.php?priceType=C"><h5>ราคาปลีก</h5></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../admin/page_main.php"><h5>กลับหน้า Admin</h5></a>
+                    <a class="nav-link" href="<?php echo MAIN ?>seller/product-order.php"><h5>แจ้งเลข EMS</h5></a>
                 </li>
             </ul>
             <a class="fas fa-shopping-basket fa-2x shopping-icon" href="<?php echo MAIN ?>seller/product-picker.php">

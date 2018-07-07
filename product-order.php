@@ -1,8 +1,23 @@
 <?php
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 require_once('config.php');
 require_once('connection.php');
+$isAdmin = false;
+if (!isset($_SESSION['admin_login'])) {
+    if (!isset($_SESSION['member_name'])) {
+        header('Location: ' . MAIN);
+        exit();
+    }
+} else {
+    if ($_SESSION['admin_login']) {
+       $isAdmin = true; 
+    } else {
+        header('Location: ' . MAIN);
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +49,7 @@ require_once('connection.php');
                         <tr>
                             <th scope="col">เลขที่บิล</th>
                             <th scope="col">วัน/เวลา</th>
-                            <th scope="col" class="text-center">พิมพ์ไปแล้ว</th>
+                            <?php echo $isAdmin ? '<th scope="col" class="text-center">พิมพ์ไปแล้ว</th>' : "" ?>
                             <th scope="col">ชื่อผู้ส่งสินค้า</th>
                             <th scope="col">ชื่อผู้รับสินค้า</th>
                             <th scope="col">Tracking</th>
@@ -52,7 +67,7 @@ require_once('connection.php');
 </html>
 <script id="orderTemplate" type="text/x-handlebars-template">
     {{#each this}}
-    <tr {{#if isDuplicate}}class="bg-danger"{{/if}}>
+    <tr <?php echo $isAdmin ? '{{#if isDuplicate}}class="bg-danger"{{/if}}' : "" ?>>
         <td>
             <a class="text-white font-weight-bold" href="<?php echo MAIN; ?>admin/order_purchase_all.php?po={{order_purchase_id}}" target="_blank">
             {{order_purchase_id}}
@@ -61,9 +76,7 @@ require_once('connection.php');
         <td>
             <p>{{dateTime}}</p>
         </td>
-        <td>
-            <p class="text-center">{{order_purchase_count_print}}</p>
-        </td>
+        <?php echo $isAdmin ? '<td><p class="text-center">{{order_purchase_count_print}}</p></td>' : "" ?>
         <td>
             <p>{{member.member_name}}</p>
             <p>{{member.member_phone}}</p>
@@ -78,14 +91,14 @@ require_once('connection.php');
         </td>
         <td>{{order_purchase_tracking}}</td>
         <td>
-            <ul class="product-detail__container">
-                {{#each images}}
-                <li class="product-image__row">
-                    <img class="product-image__picture" src="<?php echo MAIN ?>{{imageSrc}}"/>
-                    <p class="text-center">{{stock}}</p>
-                </li>
-                {{/each}}
-            </ul>
+        <ul class="product-detail__container">
+        {{#each images}}
+            <li class="product-image__row">
+                <img class="product-image__picture" src="<?php echo MAIN ?>{{imageSrc}}"/>
+                <p class="text-center">{{stock}}</p>
+            </li>
+            {{/each}}
+        </ul>
         </td>
     </tr>
     {{/each}}
@@ -94,6 +107,7 @@ require_once('connection.php');
 var options = {
     order: {
         url: "<?php echo ROOT ?>/ajax/search.purchase.order.php",
+        memberId: <?php echo $isAdmin ? "null" : $_SESSION['member_id'] ?>,
         dataSize: 30
     }
 };

@@ -9,6 +9,7 @@ function init(options) {
     $scrollCheckPoing = $('.scroll-check-point');
     fetcher = new Fetcher(options.order);
     fetcher.fetchPurchaseOrder({
+        memberId: options.order.memberId,
         pos: 0,
         size: options.order.dataSize
     });

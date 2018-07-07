@@ -15,7 +15,9 @@ try {
     //date_default_timezone_set("Asia/Bangkok");
     $result = array();
     $conn = DataBaseConnection::createConnect();
-    $orders = OrderPurchase::getAll($conn, $_REQUEST['pos'], $_REQUEST['size']);
+    $orders = $_REQUEST['memberId'] == null 
+            ? OrderPurchase::getAll($conn, $_REQUEST['pos'], $_REQUEST['size']) 
+            : OrderPurchase::getByMemberId($conn, $_REQUEST['memberId'], $_REQUEST['pos'], $_REQUEST['size']);
     foreach ($orders as &$order) {
         $purchaseDate = strtotime($order['order_purchase_adddate']);
 //        $purchaseDate_1 = date('d/m/Y H:i:s', strtotime(' -1 days', $purchaseDate));

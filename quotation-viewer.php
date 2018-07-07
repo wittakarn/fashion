@@ -1,8 +1,16 @@
 <?php
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 require_once('config.php');
 require_once('connection.php');
+
+if (!isset($_SESSION['admin_login'])) {
+    if (!$_SESSION['admin_login']) {
+        header('Location: ' . MAIN);
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
