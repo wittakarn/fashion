@@ -68,7 +68,9 @@ require_once('connection.php');
     <div class="row">
         <div class="col-2">
             member
+            {{#if this.member_id}}
             <input type="hidden" name="memberId" value="{{this.member_id}}"/>
+            {{/if}}
         </div>
         <div class="col-2">
             {{this.user}}

@@ -13,41 +13,41 @@ require_once DOCUMENT_ROOT . '/class/QuotDetail.php';
 class Quotation {
 
     public static function create($summaryPrice, $quotDetailParam) {
+        $memberId = null;
+        $userName = null;
         if (isset($_SESSION['member_name'])) {
             $userName = $_SESSION['member_name'];
         }
         if (isset($_SESSION['member_id'])) {
             $memberId = $_SESSION['member_id'];
         }
-        
-        if (isset($memberId)) {
-            $conn = DataBaseConnection::createConnect();
 
-            try {
-                $conn->beginTransaction();
+        $conn = DataBaseConnection::createConnect();
+        $quotNo = "";
+        try {
+            $conn->beginTransaction();
 
-                $quot = QuotNo::getMaxSequence($conn);
-                $quotNo = $quot['sequence'];
-                $quotMastParam['quot_no'] = $quotNo;
-                $quotMastParam['member_id'] = $memberId;
-                $quotMastParam['name'] = $userName;
-                $quotMastParam['summary_price'] = $summaryPrice;
+            $quot = QuotNo::getMaxSequence($conn);
+            $quotNo = $quot['sequence'];
+            $quotMastParam['quot_no'] = $quotNo;
+            $quotMastParam['member_id'] = $memberId;
+            $quotMastParam['name'] = $userName;
+            $quotMastParam['summary_price'] = $summaryPrice;
 
-                $quotMast = new QuotMast($conn, $quotMastParam);
-                $quotMast->create();
+            $quotMast = new QuotMast($conn, $quotMastParam);
+            $quotMast->create();
 
-                $quotDetail = new QuotDetail($conn, $quotDetailParam);
-                $quotDetail->create($quotNo);
+            $quotDetail = new QuotDetail($conn, $quotDetailParam);
+            $quotDetail->create($quotNo);
 
-                QuotNo::updateSequence($conn);
+            QuotNo::updateSequence($conn);
 
-                $conn->commit();
-            } catch (PDOException $e) {
-                $conn->rollBack();
-                echo "Failed: " . $e->getMessage();
-            }
-            $conn = null;
+            $conn->commit();
+        } catch (PDOException $e) {
+            $conn->rollBack();
+            echo "Failed: " . $e->getMessage();
         }
+        $conn = null;
         return $quotNo;
     }
 

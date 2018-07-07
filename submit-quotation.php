@@ -19,5 +19,5 @@ for ($i = 0; $i < $rowSize; $i++) {
 }
 ?>
 <script type = "text/javascript">
-    window.location.replace('<?php echo MAIN; ?>admin/page_product_book.php?product_book_status=book&member_id=<?php echo $memberId; ?>');
+    window.location.replace('<?php echo MAIN; ?>admin/page_product_book.php?product_book_status=book&prevent_clear_session=yes<?php echo $memberId != null ? "&member_id={$memberId}" : ""; ?>');
 </script>
