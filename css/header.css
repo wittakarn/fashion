@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 8, 2018, 11:58:13 AM
+    Author     : witta
+*/
+
+a.nav-link.active {
+    position: relative;
+}
+
+.nav-link {
+    color: #80ADD7;
+}
+
+.nav-link:hover {
+    color: #0ABDA0;
+}
+
+.nav-link.brand__link:hover {
+    background-color: #80ADD7;
+    cursor: pointer;
+}
+
+a.nav-link.active::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 90%;
+    height: 2px;
+    left: 5%;
+    bottom: 5px;
+    background-color: #BF9D7A;
+}
+
+.navbar-nav {
+    -ms-flex-direction: row;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.shopping-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    text-decoration: none;
+    color: #80ADD7;
+}
+
+.shopping-icon:hover {
+    color: #0ABDA0;
+}
+
+.product-count {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    bottom: -5px;
+    left: -10px;
+    font-size: 12px;
+    line-height: 20px;
+    border-radius: 20px;
+    color: white;
+    background: #0abda0;
+    text-align: center;
+}

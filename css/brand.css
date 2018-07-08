@@ -8,23 +8,6 @@ and open the template in the editor.
     Author     : wittakarn
 */
 
-a.nav-link.active {
-    position: relative;
-}
-
-.nav-link {
-    color: #80ADD7;
-}
-
-.nav-link:hover {
-    color: #0ABDA0;
-}
-
-.nav-link.brand__link:hover {
-    background-color: #80ADD7;
-    cursor: pointer;
-}
-
 .brand__list {
     width: 10%;
 }
@@ -39,51 +22,6 @@ a.nav-link.active {
     border: 2px solid lightgrey;
     border-radius: 3px;
     box-shadow: 3px 3px lightgrey;
-}
-
-a.nav-link.active::after {
-    content: '';
-    position: absolute;
-    display: inline-block;
-    width: 90%;
-    height: 2px;
-    left: 5%;
-    bottom: 5px;
-    background-color: #BF9D7A;
-}
-
-.navbar-nav {
-    -ms-flex-direction: row;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.shopping-icon {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    text-decoration: none;
-    color: #80ADD7;
-}
-
-.shopping-icon:hover {
-    color: #0ABDA0;
-}
-
-.product-count {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    bottom: -5px;
-    left: -10px;
-    font-size: 12px;
-    line-height: 20px;
-    border-radius: 20px;
-    color: white;
-    background: #0abda0;
-    text-align: center;
 }
 
 @media (max-width: 1000px){

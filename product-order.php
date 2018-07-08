@@ -1,7 +1,8 @@
 <?php
-session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+session_start();
+
 require_once('config.php');
 require_once('connection.php');
 $isAdmin = false;
@@ -32,6 +33,7 @@ if (!isset($_SESSION['admin_login'])) {
         <title>ลูกค้าสั่งสินค้า</title>
         <link rel="stylesheet" href="<?php echo ROOT; ?>/lib-css/bootstrap.min.css"/>
         <link rel="stylesheet" href="<?php echo ROOT; ?>/lib-css/fontawesome-all.min.css"/>
+        <link rel="stylesheet" href="<?php echo ROOT; ?>/css/main.css"/>
         <link rel="stylesheet" href="<?php echo ROOT; ?>/css/product-order.css"/>
         <script src="<?php echo ROOT; ?>/lib-js/jquery-3.3.1.min.js"></script>
         <script src="<?php echo ROOT; ?>/lib-js/bootstrap.min.js"></script>
@@ -42,7 +44,12 @@ if (!isset($_SESSION['admin_login'])) {
     </head>
 
     <body>
-        <div class="container-fluid">
+        <div class="container-fluid without-padding">
+            <?php
+            if (!$isAdmin) {
+                include 'include/header.php';
+            }
+            ?>
             <div class="table-responsive-md">
                 <table class="table table-dark">
                     <thead>
