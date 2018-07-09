@@ -120,7 +120,7 @@ $extraParam = Helper::getDefaultValue(filter_input(INPUT_GET, 'extraParam'), nul
 var distributorOptions = {
     product: {
         url: "<?php echo ROOT ?>/ajax/search.product.php",
-        dataSize: 30
+        dataSize: 20
     },
     extraParam: <?php echo $extraParam != null ? $extraParam : 'null'; ?>
 };

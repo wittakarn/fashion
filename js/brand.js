@@ -20,7 +20,7 @@ function emitClickEvent() {
         cate3Name: $this.attr('cate3-name'),
         cate3Opt: $this.attr('cate3-opt'),
         pos: 0,
-        size: 30
+        size: 20
     };
     emitter.emit('brand_clicked', params);
 }

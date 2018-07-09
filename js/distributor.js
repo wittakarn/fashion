@@ -1,4 +1,5 @@
 var $window = $(window);
+var $document = $(document);
 var paddingVerticalClassName = 'padding-vertical';
 var reserveProductButtonSelector = '.reserve-button';
 var $productOptionPlaceholder;
@@ -13,7 +14,7 @@ function init(options) {
     $productOptionPlaceholder = $('#productOptionPlaceholder');
     $scrollCheckPoing = $(".scroll-check-point");
     fetcher = new Fetcher(options.product);
-    if(options.extraParam) {
+    if (options.extraParam) {
         fetcher.fetchProduct(options.extraParam);
     }
     productOptionTemplate = Handlebars.compile($('#productOptionTemplate').html());
@@ -41,7 +42,7 @@ function renderAllProduct(payload, products) {
         } else {
             placeholder.append(template(response));
         }
-        
+
         $(reserveProductButtonSelector).off('click');
         $(reserveProductButtonSelector).click(function () {
             var $this = $(this);
@@ -54,7 +55,10 @@ function renderAllProduct(payload, products) {
 
         payload.pos = payload.pos + payload.size;
         $window.off("scroll");
-        if ($(document).height() > $window.height()) {
+        if ($document.height() > $window.height()) {
+            if (isBottomOfThePage()) {
+                window.scrollTo(0, $window.height() - 2);
+            }
             $window.scroll(function () {
                 loadMoreData(payload);
             });
@@ -72,9 +76,9 @@ function loadMoreData(payload) {
     var topOfScreen = $window.scrollTop();
 
     if ((bottomOfScreen > topOfElement) && (topOfScreen < bottomOfElement)) {
+        $window.off("scroll");
         $scrollCheckPoing.removeClass("invisible");
         fetcher.fetchProduct(payload);
-        $window.off("scroll");
     }
 }
 
@@ -101,6 +105,10 @@ function putReserveProductToLocalStorage(productUid, imageSrc, productDetail, pr
         localStorage.products = JSON.stringify(products);
         emitter.emit('reserve_clicked', products.length);
     }
+}
+
+function isBottomOfThePage(){
+    return $window.scrollTop() + $window.height() >= $document.height();
 }
 
 var Fetcher = function (options) {
