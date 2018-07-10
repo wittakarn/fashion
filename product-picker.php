@@ -28,6 +28,7 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
         <script src="<?php echo ROOT; ?>/lib-js/bootstrap.min.js"></script>
         <script src="<?php echo ROOT; ?>/lib-js/popper.min.js"></script>
         <script src="<?php echo ROOT; ?>/lib-js/handlebars-v4.0.11.js"></script>
+        <script src="<?php echo ROOT; ?>/js/Ajax.js"></script>
         <script src="<?php echo ROOT; ?>/js/helper.js"></script>
         <script src="<?php echo ROOT; ?>/js/product-picker.js"></script>
     </head>
@@ -74,7 +75,7 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
         <li class="researve-product__detail researve-product__detail--quantity">
             <p>จำนวน</p>
             <i class="fas fa-lg fa-border fa-minus-circle quantity__icon quantity__icon--minus"></i>
-            <input type="text" name="quantity[]" class="form-control quantity" value="{{quantity}}"/>
+            <input type="text" name="quantity[]" class="form-control quantity" value="{{quantity}}" amount="{{amount}}"/>
             <i class="fas fa-lg fa-border fa-plus-circle quantity__icon quantity__icon--plus"></i>
         </li>
         <li class="researve-product__detail researve-product__detail--button">
@@ -96,7 +97,8 @@ $priceType = Helper::getDefaultValue(filter_input(INPUT_GET, 'price_type'), "A")
 </script>
 <script>
 options = {
-    redirectUrl: '<?php echo MAIN . "seller/distributor.php" ?>'
+    redirectUrl: '<?php echo MAIN . "seller/distributor.php" ?>',
+    stockRequestUrl: "<?php echo ROOT ?>/ajax/search.stock.php"
 };
 init(options);
 </script>

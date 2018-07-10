@@ -8,7 +8,7 @@ function init(options) {
     $productPickerForm = $('#productPickerForm');
     $researveProductPlaceholder = $('#researveProductPlaceholder');
     researveProductTemplate = Handlebars.compile($('#researveProductTemplate').html());
-    displayAllReserveProduct();
+    displayAllReserveProduct(options);
     emitter.on('brand_clicked', function (param) {
         redirectToDistributorPage(param, options.redirectUrl);
     });
@@ -19,14 +19,43 @@ function redirectToDistributorPage(param, url) {
     redirect(redirectUrl);
 }
 
-function displayAllReserveProduct() {
+function displayAllReserveProduct(options) {
     var products = JSON.parse(localStorage.products);
     var summary = 0;
+    var productUids = [];
     products.forEach(function (product) {
         summary += Number(product.productPrice) * Number(product.quantity);
+        productUids.push(product.productUid);
     });
     products.summaryDisplay = summary.formatMoney(2, '.', ',');
     products.summary = summary;
+    getStockValue(options.stockRequestUrl, productUids, products);
+}
+
+function getStockValue(stockRequestUrl, productUids, products) {
+    var ajaxParam = {
+        url: stockRequestUrl,
+        data: {
+            productUids: productUids
+        },
+        success: function (data, textStatus, xhr) {
+            renderReserveProduct(data, products);
+        }
+    };
+    var ajax = new Ajax(ajaxParam);
+    ajax.call();
+}
+
+function renderReserveProduct(data, products) {
+
+    products.forEach(function (product, index) {
+        if (product.productUid === data[index].productUid) {
+            product.amount = data[index].amount;
+        } else {
+            product.amount = 0;
+        }
+    });
+
     $researveProductPlaceholder.html(researveProductTemplate(products));
     $summaryPriceDisplay = $('#summaryPriceDisplay');
     $summaryPriceInputHidden = $('#summaryPriceInputHidden');
@@ -66,22 +95,28 @@ function increaseQuantity() {
     var $quantityInput = $ul.find('.quantity');
     var quantity = Number($quantityInput.val()) + 1;
 
-    $quantityInput.val(quantity);
+    if (quantity <= $quantityInput.attr("amount")) {
+        $quantityInput.val(quantity);
 
-    updateTotalPrice($ul, quantity);
-    var $productUid = $ul.find("input[name='productUid[]']");
-    updateLocalStorageQuantity($productUid.val(), quantity);
+        updateTotalPrice($ul, quantity);
+        var $productUid = $ul.find("input[name='productUid[]']");
+        updateLocalStorageQuantity($productUid.val(), quantity);
+    }
 }
 
 function updateReserveProduct() {
     var $this = $(this);
     var $ul = $this.parent().parent();
     var quantity = Number($this.val());
+    var amount = $this.attr("amount");
+    if (quantity <= amount) {
+        updateTotalPrice($ul, quantity);
 
-    updateTotalPrice($ul, quantity);
-
-    var $productUid = $ul.find("input[name='productUid[]']");
-    updateLocalStorageQuantity($productUid, quantity);
+        var $productUid = $ul.find("input[name='productUid[]']");
+        updateLocalStorageQuantity($productUid, quantity);
+    } else {
+        $this.val(amount);
+    }
 }
 
 function removeReserveProduct() {
