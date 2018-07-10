@@ -109,14 +109,19 @@ function updateReserveProduct() {
     var $ul = $this.parent().parent();
     var quantity = Number($this.val());
     var amount = $this.attr("amount");
-    if (quantity <= amount) {
-        updateTotalPrice($ul, quantity);
 
-        var $productUid = $ul.find("input[name='productUid[]']");
-        updateLocalStorageQuantity($productUid, quantity);
-    } else {
+    if (quantity > amount) {
         $this.val(amount);
+        quantity = amount;
+    } else if (quantity < 1) {
+        $this.val(1);
+        quantity = 1;
     }
+
+    updateTotalPrice($ul, quantity);
+
+    var $productUid = $ul.find("input[name='productUid[]']");
+    updateLocalStorageQuantity($productUid.val(), quantity);
 }
 
 function removeReserveProduct() {
