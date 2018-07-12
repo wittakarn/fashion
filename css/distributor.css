@@ -45,6 +45,7 @@ and open the template in the editor.
 
 .product__link--image {
     width: 100%;
+    min-height: 100px;
 }
 
 .product__detail {

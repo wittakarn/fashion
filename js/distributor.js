@@ -1,5 +1,6 @@
 var $window = $(window);
 var $document = $(document);
+var isAndroid = navigator.userAgent.indexOf('Android') > -1;
 var paddingVerticalClassName = 'padding-vertical';
 var reserveProductButtonSelector = '.reserve-button';
 var $productOptionPlaceholder;
@@ -54,11 +55,12 @@ function renderAllProduct(payload, products) {
         });
 
         payload.pos = payload.pos + payload.size;
-        $window.off("scroll");
-        if ($document.height() > $window.height()) {
+        if (!isLoadingShowInViewPort()) {
             if (isBottomOfThePage()) {
                 window.scrollTo(0, $window.height() - 2);
             }
+
+            $window.off("scroll");
             $window.scroll(function () {
                 loadMoreData(payload);
             });
@@ -70,13 +72,7 @@ function renderAllProduct(payload, products) {
 }
 
 function loadMoreData(payload) {
-    var topOfElement = $scrollCheckPoing.offset().top;
-    var bottomOfElement = topOfElement + $scrollCheckPoing.outerHeight();
-    var bottomOfScreen = $window.scrollTop() + window.innerHeight;
-    var topOfScreen = $window.scrollTop();
-
-    if ((bottomOfScreen > topOfElement) && (topOfScreen < bottomOfElement)) {
-        $window.off("scroll");
+    if (isLoadingShowInViewPort()) {
         $scrollCheckPoing.removeClass("invisible");
         fetcher.fetchProduct(payload);
     }
@@ -107,7 +103,14 @@ function putReserveProductToLocalStorage(productUid, imageSrc, productDetail, pr
     }
 }
 
-function isBottomOfThePage(){
+function isLoadingShowInViewPort() {
+    var topOfElement = $scrollCheckPoing.offset().top - (isAndroid ? 100 : 0);
+    var bottomOfScreen = $window.scrollTop() + window.innerHeight;
+
+    return (bottomOfScreen > topOfElement);
+}
+
+function isBottomOfThePage() {
     return $window.scrollTop() + $window.height() >= $document.height();
 }
 
