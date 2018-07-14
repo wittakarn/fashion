@@ -73,6 +73,7 @@ function renderAllProduct(payload, products) {
 
 function loadMoreData(payload) {
     if (isLoadingShowInViewPort()) {
+        $window.off("scroll");
         $scrollCheckPoing.removeClass("invisible");
         fetcher.fetchProduct(payload);
     }
